@@ -76,17 +76,17 @@ const Dashboard: React.FC = () => {
             } else {
                 // Dummy data for testing/fallback
                 // setTodaysToppers([
-                //     { _id: '1', name: 'Muhammed Nihal', ward: 'Tiruvegapura', totalQuantity: 10, totalAmount: 3500 },
-                //     { _id: '2', name: 'Adil K', ward: 'Muthuthala', totalQuantity: 8, totalAmount: 2800 },
-                //     { _id: '3', name: 'Sahal P', ward: 'Vilathur', totalQuantity: 5, totalAmount: 1750 }
+                //     { _id: '1', name: 'Muhammed Nihal', ward: 'Tiruvegapura', totalQuantity: 10, totalAmount: 5000 },
+                //     { _id: '2', name: 'Adil K', ward: 'Muthuthala', totalQuantity: 8, totalAmount: 4000 },
+                //     { _id: '3', name: 'Sahal P', ward: 'Vilathur', totalQuantity: 5, totalAmount: 2500 }
                 // ]);
             }
         } catch (error) {
             console.error('Error fetching toppers, using dummy data:', error);
             setTodaysToppers([
-                { _id: '1', name: 'Muhammed Nihal', ward: 'Tiruvegapura', totalQuantity: 10, totalAmount: 3500 },
-                { _id: '2', name: 'Adil K', ward: 'Muthuthala', totalQuantity: 8, totalAmount: 2800 },
-                { _id: '3', name: 'Sahal P', ward: 'Vilathur', totalQuantity: 5, totalAmount: 1750 }
+                { _id: '1', name: 'Muhammed Nihal', ward: 'Tiruvegapura', totalQuantity: 10, totalAmount: 5000 },
+                { _id: '2', name: 'Adil K', ward: 'Muthuthala', totalQuantity: 8, totalAmount: 4000 },
+                { _id: '3', name: 'Sahal P', ward: 'Vilathur', totalQuantity: 5, totalAmount: 2500 }
             ]);
         }
     };

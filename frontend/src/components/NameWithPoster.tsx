@@ -19,12 +19,12 @@ const NameWithPoster: React.FC = () => {
         if (nameParam) {
             setName(nameParam);
             setQuantity(quantityParam ? parseInt(quantityParam) : 1);
-            setAmount(amountParam ? parseInt(amountParam) : 350);
+            setAmount(amountParam ? parseInt(amountParam) : 500);
             setGenerated(true);
 
             // If type=image, generate and return image only
             if (typeParam === 'image') {
-                generateImageOnly(nameParam, quantityParam ? parseInt(quantityParam) : 1, amountParam ? parseInt(amountParam) : 350);
+                generateImageOnly(nameParam, quantityParam ? parseInt(quantityParam) : 1, amountParam ? parseInt(amountParam) : 500);
             }
         }
     }, [nameParam, quantityParam, amountParam, typeParam]);

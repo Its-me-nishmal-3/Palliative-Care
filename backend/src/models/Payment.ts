@@ -16,7 +16,7 @@ export interface IPayment extends Document {
 const PaymentSchema: Schema = new Schema({
     name: { type: String, required: true },
     ward: { type: String, required: true },
-    amount: { type: Number, required: true, default: 350 },
+    amount: { type: Number, required: true, default: 500 },
     quantity: { type: Number, required: true, default: 1 },
     mobile: { type: String, required: true },
     paymentId: { type: String, required: true },

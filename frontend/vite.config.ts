@@ -11,10 +11,10 @@ export default defineConfig({
       injectRegister: 'auto',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'MYL- msf thiruvegappura',
-        short_name: 'MYL- msf thiruvegappura',
-        description: 'MYL- msf thiruvegappura',
-        theme_color: '#ffffffff',
+        name: 'Thachanattukara Palliative Care Society',
+        short_name: 'Thachanattukara Palliative',
+        description: 'Thachanattukara Palliative Care Society Dates Challenge',
+        theme_color: '#6A2C91',
         icons: [
           {
             src: 'pwa-192x192.png',

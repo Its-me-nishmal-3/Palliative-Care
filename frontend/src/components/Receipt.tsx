@@ -48,7 +48,7 @@ const Receipt: React.FC = () => {
                 ctx.font = 'bold 40px Arial, sans-serif';
                 ctx.textAlign = 'left';
                 ctx.fillStyle = '#000000';
-                ctx.fillText(`₹${payment.amount || (payment.quantity * 350)}`, amtX, amtY);
+                ctx.fillText(`₹${payment.amount || (payment.quantity * 500)}`, amtX, amtY);
 
                 // Area 2: Name - coords (241,633,1178,719)
                 const nameX = 241;
@@ -115,7 +115,7 @@ const Receipt: React.FC = () => {
                         }}
                     >
                         <span className="font-bold text-[2vw] sm:text-[1.5vw] md:text-xs lg:text-sm text-left leading-none">
-                            {payment.amount || (payment.quantity * 350)}
+                            {payment.amount || (payment.quantity * 500)}
                         </span>
                     </div>
 
@@ -187,7 +187,7 @@ const Receipt: React.FC = () => {
                                 ctx.textAlign = 'left';
                                 // Using Black for Amount based on component styles
                                 ctx.fillStyle = '#000000';
-                                ctx.fillText(`₹${payment.amount || (payment.quantity * 350)}`, amtX, amtY);
+                                ctx.fillText(`₹${payment.amount || (payment.quantity * 500)}`, amtX, amtY);
 
 
                                 // Area 2: Name - coords="241,633,1178,719"

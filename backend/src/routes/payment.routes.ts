@@ -38,7 +38,7 @@ const sendWhatsAppNotification = async (name: string, quantity: number, amount: 
 router.post('/create-order', paymentLimiter, async (req, res) => {
     try {
         const { quantity = 1, name, mobile, ward } = req.body;
-        const amount = 350 * quantity;
+        const amount = 500 * quantity;
 
         const options = {
             amount: amount * 100, // amount in paisa
@@ -316,7 +316,7 @@ router.post('/test-webhook', paymentLimiter, async (req, res) => {
                 paymentId: paymentId || `test_pay_${Date.now()}`,
                 name: 'Test User',
                 ward: 'Test Ward',
-                amount: 350,
+                amount: 500,
                 quantity: 1,
                 mobile: '1234567890',
                 status: 'success',
@@ -345,7 +345,7 @@ router.post('/test-webhook', paymentLimiter, async (req, res) => {
                 paymentId: paymentId || `test_pay_${Date.now()}`,
                 name: 'Test User',
                 ward: 'Test Ward',
-                amount: 350,
+                amount: 500,
                 quantity: 1,
                 mobile: '1234567890',
                 status: 'failed',

@@ -194,8 +194,8 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ onClose }) => {
 
                     <div className="pt-4">
                         <div className="flex justify-between items-center mb-4 text-sm text-gray-600">
-                            <span>Total Amount ({quantity} x ₹350)</span>
-                            <span className="text-xl font-bold text-gray-900">₹{350 * quantity}</span>
+                            <span>Total Amount ({quantity} x ₹500)</span>
+                            <span className="text-xl font-bold text-gray-900">₹{500 * quantity}</span>
                         </div>
 
                         <button
@@ -203,7 +203,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ onClose }) => {
                             disabled={loading}
                             className="w-full bg-brand-purple hover:bg-brand-deep-violet text-white font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                         >
-                            {loading ? 'Processing...' : `Pay ₹${350 * quantity}`}
+                            {loading ? 'Processing...' : `Pay ₹${500 * quantity}`}
                         </button>
                     </div>
                 </div>

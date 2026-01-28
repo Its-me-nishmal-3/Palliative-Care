@@ -14,7 +14,7 @@ const TermsAndConditions = () => {
                     We offer high-quality Dates packs.
                 </p>
                 <p>
-                    <strong>Price:</strong> Each Dates pack has a fixed price of <strong>₹350</strong>. Prices are subject to change without prior notice, but confirmed orders will be honored at the booked price.
+                    <strong>Price:</strong> Each Dates pack has a fixed price of <strong>₹500</strong>. Prices are subject to change without prior notice, but confirmed orders will be honored at the booked price.
                 </p>
 
                 <h2 className="text-xl font-semibold text-white mt-4">Ordering</h2>

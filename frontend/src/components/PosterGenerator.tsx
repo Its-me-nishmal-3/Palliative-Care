@@ -304,7 +304,7 @@ const PosterGenerator: React.FC = () => {
         try {
             const dataUrl = canvasRef.current.toDataURL('image/png', 1.0);
             const blob = await (await fetch(dataUrl)).blob();
-            const file = new File([blob], `myl-msf-thiruvegappura-panchayath-poster-${name || 'participant'}.png`, { type: 'image/png' });
+            const file = new File([blob], `thachanattukara-palliative-dates-challenge-poster-${name || 'participant'}.png`, { type: 'image/png' });
 
             if (navigator.share) {
                 await navigator.share({
@@ -332,7 +332,7 @@ const PosterGenerator: React.FC = () => {
         try {
             // Create a temporary link
             const link = document.createElement('a');
-            link.download = `myl-msf-thiruvegappura-panchayath-poster-${name || 'participant'}.png`;
+            link.download = `thachanattukara-palliative-dates-challenge-poster-${name || 'participant'}.png`;
             link.href = canvasRef.current.toDataURL('image/png', 1.0);
             document.body.appendChild(link);
             link.click();
