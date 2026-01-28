@@ -24,7 +24,7 @@ import banner13 from '../assets/WhatsApp Image 2026-01-24 at 1.12.46 AM.jpeg';
 import banner14 from '../assets/WhatsApp Image 2026-01-24 at 1.12.47 AM.jpeg';
 import banner15 from '../assets/WhatsApp Image 2026-01-24 at 1.14.10 AM.jpeg';
 
-const SOCKET_URL = 'https://myl-msf-thiruvegappura.onrender.com';
+const SOCKET_URL = 'https://socketurl.onrender.com';
 
 const UNIT_NAMES = [
     'കുണ്ടൂർകുന്ന്', 'കൂത്തുപറമ്പ്', 'കിഴക്കുംപുറം', 'ചോളോട്', 'നറുക്കോട്',
@@ -72,7 +72,7 @@ const Dashboard: React.FC = () => {
 
     const fetchToppers = async () => {
         try {
-            const res = await fetch('https://myl-msf-thiruvegappura.onrender.com/api/payment/todays-toppers');
+            const res = await fetch('https://socketurl.onrender.com/api/payment/todays-toppers');
             if (!res.ok) throw new Error('Failed to fetch');
 
             const data = await res.json();
