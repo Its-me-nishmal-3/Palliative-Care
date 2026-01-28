@@ -1,6 +1,7 @@
 
 
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo.jpeg';
 
 const Footer = () => {
     return (
@@ -8,14 +9,17 @@ const Footer = () => {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
 
-                    <div>
-                        <h3 className="text-white text-lg font-bold mb-4">Thachanattukara Palliative Care Society</h3>
-                        <p className="text-sm mb-2">
-                            Empowering the community with quality products and services.
-                        </p>
-                        <div className="text-sm text-brand-lavender/80">
-                            <p>Email: dev.nishmal@gmail.com</p>
-                            <p>Phone: +91 9544472307</p>
+                    <div className="flex flex-col items-center md:items-start gap-4">
+                        <img src={logo} alt="Logo" className="w-16 h-16 rounded-full object-cover border-2 border-brand-lavender/20 shadow-lg" />
+                        <div>
+                            <h3 className="text-white text-lg font-bold mb-2">Thachanattukara Palliative Care Society</h3>
+                            <p className="text-sm mb-2 text-brand-lavender/80">
+                                Empowering the community with quality products and services.
+                            </p>
+                            <div className="text-sm text-brand-lavender/60">
+                                <p>Email: dev.nishmal@gmail.com</p>
+                                <p>Phone: +91 9544472307</p>
+                            </div>
                         </div>
                     </div>
 

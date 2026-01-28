@@ -7,22 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import { IndianRupee, Trophy, Crown } from 'lucide-react';
 
 // Assets
+import logo from '../assets/logo.jpeg';
 import mainImage from '../assets/main__ .jpeg';
-import banner1 from '../assets/WhatsApp Image 2026-01-22 at 9.56.54 AM (1).jpeg';
-import banner2 from '../assets/WhatsApp Image 2026-01-22 at 9.56.54 AM.jpeg';
-import banner3 from '../assets/WhatsApp Image 2026-01-22 at 9.56.55 AM.jpeg';
-import banner4 from '../assets/WhatsApp Image 2026-01-22 at 9.56.57 AM (1).jpeg';
-import banner5 from '../assets/WhatsApp Image 2026-01-22 at 9.56.57 AM.jpeg';
-import banner6 from '../assets/WhatsApp Image 2026-01-22 at 9.56.58 AM.jpeg';
-import banner7 from '../assets/WhatsApp Image 2026-01-24 at 1.12.38 AM.jpeg';
-import banner8 from '../assets/WhatsApp Image 2026-01-24 at 1.12.39 AM.jpeg';
-import banner9 from '../assets/WhatsApp Image 2026-01-24 at 1.12.41 AM.jpeg';
-import banner10 from '../assets/WhatsApp Image 2026-01-24 at 1.12.44 AM.jpeg';
-import banner11 from '../assets/WhatsApp Image 2026-01-24 at 1.12.45 AM (1).jpeg';
-import banner12 from '../assets/WhatsApp Image 2026-01-24 at 1.12.45 AM.jpeg';
-import banner13 from '../assets/WhatsApp Image 2026-01-24 at 1.12.46 AM.jpeg';
-import banner14 from '../assets/WhatsApp Image 2026-01-24 at 1.12.47 AM.jpeg';
-import banner15 from '../assets/WhatsApp Image 2026-01-24 at 1.14.10 AM.jpeg';
+import banner1 from '../assets/WhatsApp Image 2026-01-23 at 12.11.02 AM.jpeg';
+import banner2 from '../assets/WhatsApp Image 2026-01-23 at 12.11.03 AM (1).jpeg';
+import banner3 from '../assets/WhatsApp Image 2026-01-23 at 12.11.03 AM (2).jpeg';
+import banner4 from '../assets/WhatsApp Image 2026-01-23 at 12.11.03 AM.jpeg';
+import banner5 from '../assets/WhatsApp Image 2026-01-23 at 12.11.04 AM (1).jpeg';
+import banner6 from '../assets/WhatsApp Image 2026-01-23 at 12.11.04 AM.jpeg';
+import banner7 from '../assets/WhatsApp Image 2026-01-23 at 12.11.05 AM.jpeg';
+import banner8 from '../assets/WhatsApp Image 2026-01-23 at 12.11.06 AM.jpeg';
 
 const SOCKET_URL = 'https://socketurl.onrender.com';
 
@@ -34,7 +28,7 @@ const UNIT_NAMES = [
     'പാലോട്', 'പാറമ്മൽ', 'കുന്നുംപുറം', 'കൊടക്കാട്', 'Other'
 ];
 
-const BANNERS = [banner1, banner2, banner3, banner4, banner5, banner6, banner7, banner8, banner9, banner10, banner11, banner12, banner13, banner14, banner15];
+const BANNERS = [banner1, banner2, banner3, banner4, banner5, banner6, banner7, banner8];
 
 interface Stats {
     totalAmount: number;
@@ -139,12 +133,15 @@ const Dashboard: React.FC = () => {
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 space-y-8 pt-8">
                 {/* Header */}
-                <header className="flex justify-between items-center backdrop-blur-xl bg-white/80 p-4 md:p-5 rounded-2xl border border-brand-purple/10 sticky top-4 z-50 shadow-xl">
-                    <div>
-                        <h1 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-brand-purple drop-shadow-sm">
-                            Thachanattukara Palliative Care Society
-                        </h1>
-                        <p className="text-gray-600 text-xs md:text-sm font-medium">DATES CHALLENGE</p>
+                <header className="flex justify-between items-center backdrop-blur-xl bg-white/80 p-3 md:p-4 rounded-2xl border border-brand-purple/10 sticky top-4 z-50 shadow-xl">
+                    <div className="flex items-center gap-3">
+                        <img src={logo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover shadow-md border border-brand-purple/10" />
+                        <div>
+                            <h1 className="text-lg md:text-2xl font-bold bg-clip-text text-transparent bg-brand-purple drop-shadow-sm leading-tight">
+                                Thachanattukara Palliative Care Society
+                            </h1>
+                            <p className="text-gray-600 text-[10px] md:text-xs font-medium uppercase tracking-wider">DATES CHALLENGE</p>
+                        </div>
                     </div>
                     <div className="flex gap-3 md:gap-4 items-center">
                         <button
