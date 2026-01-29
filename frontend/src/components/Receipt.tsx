@@ -144,19 +144,17 @@ const Receipt: React.FC = () => {
                 </div>
             </div>
 
-            <div className="mt-8 flex gap-4 w-full max-w-xs justify-center">
+            <div className="mt-8 grid grid-cols-2 sm:flex sm:flex-row gap-3 w-full max-w-lg justify-center px-4">
                 <button
                     onClick={handleDownload}
                     disabled={isDownloading}
-                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 brand-gradient text-white rounded-xl hover:opacity-90 transition-all shadow-lg font-bold active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 brand-gradient text-white rounded-xl hover:opacity-90 transition-all shadow-md font-bold text-sm active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                     {isDownloading ? (
-                        <>
-                            <Loader2 size={20} className="animate-spin" /> Generating...
-                        </>
+                        <Loader2 size={16} className="animate-spin" />
                     ) : (
                         <>
-                            <Download size={20} /> Download
+                            <Download size={16} /> Download
                         </>
                     )}
                 </button>
@@ -227,24 +225,22 @@ const Receipt: React.FC = () => {
                         }
                     }}
                     disabled={isDownloading}
-                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 brand-gradient text-white rounded-xl hover:opacity-90 transition-all shadow-lg font-bold active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 brand-gradient text-white rounded-xl hover:opacity-90 transition-all shadow-md font-bold text-sm active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                    {isDownloading ? <Loader2 size={20} className="animate-spin" /> : <Share2 size={20} />} Share
+                    {isDownloading ? <Loader2 size={16} className="animate-spin" /> : <Share2 size={16} />} Share
                 </button>
-                <div className="flex flex-col sm:flex-row gap-4 w-full">
-                    <button
-                        onClick={() => navigate('/gen-poster')}
-                        className="flex-1 bg-brand-teal hover:bg-brand-teal/90 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2"
-                    >
-                        Generate Poster
-                    </button>
-                    <button
-                        onClick={() => navigate('/')}
-                        className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition-colors"
-                    >
-                        Back to Home
-                    </button>
-                </div>
+                <button
+                    onClick={() => navigate('/gen-poster')}
+                    className="flex-1 bg-brand-teal hover:bg-brand-teal/90 text-white font-bold py-2.5 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 text-sm"
+                >
+                    Poster
+                </button>
+                <button
+                    onClick={() => navigate('/')}
+                    className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 px-4 rounded-xl transition-colors text-sm shadow-sm"
+                >
+                    Home
+                </button>
             </div>
         </div>
     );
