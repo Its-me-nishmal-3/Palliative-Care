@@ -100,12 +100,12 @@ const PosterGenerator: React.FC = () => {
     const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
 
     // Coordinates configuration
-    // Based on user provided image (1707x2560)
-    // Photo: coords="314,1545,796,2167" (left,top,right,bottom) -> x=314, y=1545, w=482, h=622
-    // Name: coords="312,2199,1034,2295" (left,top,right,bottom) -> x=312, y=2199, w=722, h=96
+    // Based on user provided image (4500x5625)
+    // Photo: coords="564,2932,1831,4283" (left,top,right,bottom) -> x=564, y=2932, w=1267, h=1351
+    // Name: coords="588,4406,2653,4577" (left,top,right,bottom) -> x=588, y=4406, w=2065, h=171
     const COORDS = {
-        PHOTO: { x: 314, y: 1545, w: 482, h: 622 },
-        NAME: { x: 312, y: 2199, w: 722, h: 96 },
+        PHOTO: { x: 564, y: 2932, w: 1267, h: 1351 },
+        NAME: { x: 588, y: 4406, w: 2065, h: 171 },
         TEMPLATE_SRC: '/challenge-frame.png'
     };
 
@@ -136,8 +136,8 @@ const PosterGenerator: React.FC = () => {
         canvas.width = templateImage.naturalWidth;
         canvas.height = templateImage.naturalHeight;
 
-        // The coordinates are based on actual image dimensions (1707x2560)
-        const REFERENCE_WIDTH = 1707; // Actual image width
+        // The coordinates are based on actual image dimensions (4500x5625)
+        const REFERENCE_WIDTH = 4500; // Actual image width
         const scale = canvas.width / REFERENCE_WIDTH;
 
         // console.log("Canvas Size:", canvas.width, canvas.height, "Scale Factor:", scale); 
@@ -225,10 +225,10 @@ const PosterGenerator: React.FC = () => {
 
         ctx.save();
         // Scale font size as well.
-        // Base size 80 seems appropriate for 2560px width.
-        const fontSize = Math.round(50 * scale);
+        // Base size 120 seems appropriate for 4500px width.
+        const fontSize = Math.round(120 * scale);
         ctx.font = `bold ${fontSize}px Arial`;
-        ctx.fillStyle = '#ffffffff';
+        ctx.fillStyle = '#6c308bff';
         ctx.textAlign = 'start';
         ctx.textBaseline = 'middle';
 
