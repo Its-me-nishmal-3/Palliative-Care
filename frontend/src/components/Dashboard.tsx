@@ -222,9 +222,7 @@ const Dashboard: React.FC = () => {
                                         <div className="flex items-center gap-4">
                                             <div className={`
                                                 w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm shadow-sm
-                                                ${index === 0 ? 'bg-yellow-400 text-white' :
-                                                    index === 1 ? 'bg-gray-400 text-white' :
-                                                        index === 2 ? 'bg-orange-400 text-white' : 'bg-brand-blue text-white'}
+                                                ${index === 0 ? 'bg-yellow-400 text-white' : 'bg-brand-blue text-white'}
                                             `}>
                                                 {index + 1}
                                             </div>
@@ -239,7 +237,7 @@ const Dashboard: React.FC = () => {
                                             </div>
                                         </div>
                                         {index === 0 && (
-                                            <Crown className="w-5 h-5 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity absolute top-2 right-2 rotate-12" />
+                                            <Crown className="w-5 h-5 text-yellow-400 absolute top-2 right-2 rotate-12" />
                                         )}
                                     </div>
                                 ))}
@@ -475,7 +473,7 @@ const Dashboard: React.FC = () => {
 
                                         {/* Content */}
                                         <div>
-                                            <p className="text-gray-500 text-xs uppercase tracking-wider mb-3 font-semibold">
+                                            <p className="text-gray-900 text-xs uppercase tracking-wider mb-3 font-bold">
                                                 {ward.name}
                                             </p>
                                             <p className={`text-3xl font-bold ${getAmountColor()}`}>
