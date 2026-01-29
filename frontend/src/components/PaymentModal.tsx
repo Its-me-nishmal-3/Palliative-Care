@@ -151,7 +151,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ onClose }) => {
                         <button
                             onClick={handlePayment}
                             disabled={loading}
-                            className="w-full bg-brand-purple hover:bg-brand-deep-violet text-white font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                            className="w-full brand-gradient hover:opacity-90 text-white font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                         >
                             {loading ? 'Processing...' : `Pay ₹${500 * quantity}`}
                         </button>

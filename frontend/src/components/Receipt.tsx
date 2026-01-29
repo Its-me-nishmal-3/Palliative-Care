@@ -86,7 +86,7 @@ const Receipt: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-brand-lavender">
+        <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-white">
             <div className="relative w-full max-w-lg shadow-2xl rounded-lg overflow-hidden">
                 {/* Display Container */}
                 <div className="relative w-full">
@@ -148,7 +148,7 @@ const Receipt: React.FC = () => {
                 <button
                     onClick={handleDownload}
                     disabled={isDownloading}
-                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-brand-purple text-white rounded-xl hover:bg-brand-deep-violet transition-all shadow-lg font-bold active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 brand-gradient text-white rounded-xl hover:opacity-90 transition-all shadow-lg font-bold active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                     {isDownloading ? (
                         <>
@@ -227,7 +227,7 @@ const Receipt: React.FC = () => {
                         }
                     }}
                     disabled={isDownloading}
-                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-brand-purple text-white rounded-xl hover:bg-brand-deep-violet transition-all shadow-lg font-bold active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 brand-gradient text-white rounded-xl hover:opacity-90 transition-all shadow-lg font-bold active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                     {isDownloading ? <Loader2 size={20} className="animate-spin" /> : <Share2 size={20} />} Share
                 </button>
@@ -240,7 +240,7 @@ const Receipt: React.FC = () => {
                     </button>
                     <button
                         onClick={() => navigate('/')}
-                        className="flex-1 bg-brand-deep-violet hover:bg-brand-deep-violet/90 text-white font-bold py-3 px-6 rounded-xl transition-colors"
+                        className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition-colors"
                     >
                         Back to Home
                     </button>

@@ -51,7 +51,7 @@ const InstallPWA: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-brand-lavender text-gray-900 p-6 flex flex-col items-center justify-center relative overflow-hidden">
+        <div className="min-h-screen bg-white text-gray-900 p-6 flex flex-col items-center justify-center relative overflow-hidden">
             {/* Background Effects */}
             <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-brand-purple/5 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-brand-purple/5 rounded-full blur-[120px] pointer-events-none" />
@@ -73,7 +73,7 @@ const InstallPWA: React.FC = () => {
                         <img src="/pwa-192x192.png" alt="App Icon" className="w-full h-full object-cover" />
                     </div>
 
-                    <h1 className="text-2xl font-bold mb-2 text-brand-purple">
+                    <h1 className="text-2xl font-bold mb-2 text-brand-blue">
                         Install App
                     </h1>
                     <p className="text-gray-600 mb-8">
@@ -93,7 +93,7 @@ const InstallPWA: React.FC = () => {
                                     {deferredPrompt ? (
                                         <button
                                             onClick={handleInstallClick}
-                                            className="w-full bg-brand-purple hover:bg-brand-deep-violet text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg"
+                                            className="w-full brand-gradient hover:opacity-90 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg"
                                         >
                                             <Download className="w-5 h-5" />
                                             Install App

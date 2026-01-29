@@ -20,13 +20,16 @@
 
 body {
   font-family: var(--font-sans);
-  @apply bg-brand-purple text-white overflow-x-hidden;
-  background: linear-gradient(135deg, #3052a1 0%, #6c308b 100%);
+  @apply bg-white text-gray-900 overflow-x-hidden;
   min-height: 100vh;
 }
 
+.brand-gradient {
+  background: linear-gradient(135deg, #3052a1 0%, #6c308b 100%);
+}
+
 .glass-panel {
-  @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-xl rounded-2xl;
+  @apply bg-white/70 backdrop-blur-lg border border-gray-200 shadow-xl rounded-2xl;
 }
 
 .glass-input {

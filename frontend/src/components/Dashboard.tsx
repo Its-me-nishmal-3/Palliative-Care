@@ -122,31 +122,31 @@ const Dashboard: React.FC = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-transparent text-white font-sans selection:bg-brand-purple/50 pb-24 relative overflow-hidden">
+        <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-brand-blue/30 pb-24 relative overflow-hidden">
 
             {/* Enhanced Background Effects */}
             <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-                <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-brand-purple/10 rounded-full blur-[150px] animate-pulse" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-brand-deep-violet/10 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '1s' }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30%] h-[30%] bg-brand-lavender/50 rounded-full blur-[100px]" />
+                <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-brand-purple/5 rounded-full blur-[150px] animate-pulse" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-brand-blue/5 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '1s' }} />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30%] h-[30%] bg-brand-lavender/30 rounded-full blur-[100px]" />
             </div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 space-y-8 pt-8">
                 {/* Header */}
-                <header className="flex justify-between items-center backdrop-blur-xl bg-white/10 p-3 md:p-4 rounded-2xl border border-white/10 sticky top-4 z-50 shadow-xl">
+                <header className="flex justify-between items-center backdrop-blur-xl bg-white/70 p-3 md:p-4 rounded-2xl border border-gray-200 sticky top-4 z-50 shadow-lg">
                     <div className="flex items-center gap-3">
-                        <img src={logo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover shadow-md border border-white/20" />
+                        <img src={logo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover shadow-md border border-gray-100" />
                         <div>
-                            <h1 className="text-lg md:text-2xl font-bold text-white drop-shadow-sm leading-tight">
+                            <h1 className="text-lg md:text-2xl font-bold text-gray-900 drop-shadow-sm leading-tight">
                                 Thachanattukara Palliative Care Society
                             </h1>
-                            <p className="text-gray-300 text-[10px] md:text-xs font-medium uppercase tracking-wider">DATES CHALLENGE</p>
+                            <p className="text-brand-blue text-[10px] md:text-xs font-bold uppercase tracking-wider">DATES CHALLENGE</p>
                         </div>
                     </div>
                     <div className="flex gap-3 md:gap-4 items-center">
                         <button
                             onClick={() => navigate('/history')}
-                            className="px-4 py-2 bg-brand-purple hover:bg-brand-deep-violet rounded-lg text-sm transition-all h-10 text-white font-bold shadow-lg"
+                            className="px-4 py-2 brand-gradient hover:opacity-90 rounded-lg text-sm transition-all h-10 text-white font-bold shadow-lg"
                         >
                             History
                         </button>
@@ -162,42 +162,42 @@ const Dashboard: React.FC = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="bg-white/10 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:shadow-2xl hover:shadow-brand-purple/20 transition-all duration-300"
+                        className="bg-white border border-gray-100 p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:shadow-2xl hover:shadow-brand-purple/10 transition-all duration-300 shadow-xl"
                     >
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <IndianRupee className="w-20 h-20 text-white" />
+                        <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                            <IndianRupee className="w-20 h-20 text-brand-purple" />
                         </div>
                         <div className="relative z-10">
-                            <h3 className="text-brand-lavender text-xs md:text-sm uppercase tracking-widest font-bold mb-2 flex items-center gap-2">
+                            <h3 className="text-brand-purple text-xs md:text-sm uppercase tracking-widest font-bold mb-2 flex items-center gap-2">
                                 <span className="w-2 h-2 bg-brand-blue rounded-full animate-pulse"></span>
                                 Total Collected
                             </h3>
-                            <p className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-sm">
+                            <p className="text-5xl md:text-6xl font-extrabold text-brand-blue drop-shadow-sm">
                                 ₹{stats.totalAmount.toLocaleString()}
                             </p>
                         </div>
-                        <div className="absolute bottom-0 left-0 w-full h-1.5 bg-brand-purple animate-pulse" />
+                        <div className="absolute bottom-0 left-0 w-full h-1.5 brand-gradient animate-pulse" />
                     </motion.div>
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="bg-white/10 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-300"
+                        className="bg-white border border-gray-100 p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:shadow-2xl hover:shadow-brand-blue/10 transition-all duration-300 shadow-xl"
                     >
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <svg className="w-20 h-20 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" /></svg>
+                        <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                            <svg className="w-20 h-20 text-brand-blue" fill="currentColor" viewBox="0 0 20 20"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" /></svg>
                         </div>
                         <div className="relative z-10">
-                            <h3 className="text-brand-lavender text-xs md:text-sm uppercase tracking-widest font-bold mb-2 flex items-center gap-2">
-                                <span className="w-2 h-2 bg-brand-blue rounded-full animate-pulse"></span>
+                            <h3 className="text-brand-blue text-xs md:text-sm uppercase tracking-widest font-bold mb-2 flex items-center gap-2">
+                                <span className="w-2 h-2 bg-brand-purple rounded-full animate-pulse"></span>
                                 Total Packs
                             </h3>
-                            <p className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-sm">
+                            <p className="text-5xl md:text-6xl font-extrabold text-brand-purple drop-shadow-sm">
                                 {stats.totalCount}
                             </p>
                         </div>
-                        <div className="absolute bottom-0 left-0 w-full h-1.5 bg-brand-teal animate-pulse" />
+                        <div className="absolute bottom-0 left-0 w-full h-1.5 brand-gradient animate-pulse" />
                     </motion.div>
                 </div>
 
@@ -208,32 +208,32 @@ const Dashboard: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="w-full max-w-4xl mx-auto mb-12"
                     >
-                        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-xl">
+                        <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-xl">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="p-2 bg-yellow-400/20 rounded-lg border border-yellow-400/30">
-                                    <Trophy className="text-yellow-400 w-6 h-6" />
+                                <div className="p-2 bg-yellow-400/10 rounded-lg border border-yellow-400/20">
+                                    <Trophy className="text-yellow-600 w-6 h-6" />
                                 </div>
-                                <h2 className="text-xl font-bold text-white">Today's Toppers</h2>
+                                <h2 className="text-xl font-bold text-gray-900">Today's Toppers</h2>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                 {todaysToppers.map((topper, index) => (
-                                    <div key={topper._id} className="relative bg-white/5 rounded-xl p-4 border border-white/10 hover:border-white/20 hover:shadow-lg transition-all flex items-center justify-between group">
+                                    <div key={topper._id} className="relative bg-gray-50 rounded-xl p-4 border border-gray-100 hover:border-brand-purple/20 hover:shadow-lg transition-all flex items-center justify-between group">
                                         <div className="flex items-center gap-4">
                                             <div className={`
                                                 w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm shadow-sm
-                                                ${index === 0 ? 'bg-yellow-400/20 text-yellow-400 border border-yellow-400/30' :
-                                                    index === 1 ? 'bg-gray-400/20 text-gray-200 border border-gray-400/30' :
-                                                        index === 2 ? 'bg-orange-400/20 text-orange-400 border border-orange-400/30' : 'bg-brand-blue/20 text-blue-300 border border-brand-blue/30'}
+                                                ${index === 0 ? 'bg-yellow-400 text-white' :
+                                                    index === 1 ? 'bg-gray-400 text-white' :
+                                                        index === 2 ? 'bg-orange-400 text-white' : 'bg-brand-blue text-white'}
                                             `}>
                                                 {index + 1}
                                             </div>
                                             <div>
-                                                <h3 className="font-semibold text-white text-sm">{topper.name}</h3>
-                                                <p className="text-xs text-gray-400">{topper.ward}</p>
+                                                <h3 className="font-semibold text-gray-900 text-sm">{topper.name}</h3>
+                                                <p className="text-xs text-gray-500">{topper.ward}</p>
                                                 <div className="flex gap-2 mt-1">
-                                                    <span className="text-xs font-bold text-brand-lavender">{topper.totalQuantity} Packs</span>
-                                                    <span className="text-xs font-bold text-gray-500">|</span>
+                                                    <span className="text-xs font-bold text-brand-purple">{topper.totalQuantity} Packs</span>
+                                                    <span className="text-xs font-bold text-gray-300">|</span>
                                                     <span className="text-xs font-bold text-brand-blue">₹{topper.totalAmount}</span>
                                                 </div>
                                             </div>
@@ -257,20 +257,20 @@ const Dashboard: React.FC = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="bg-white/10 border border-white/10 rounded-3xl p-6 md:p-8 overflow-hidden relative shadow-xl h-full backdrop-blur-md"
+                            className="bg-white border border-gray-100 rounded-3xl p-6 md:p-8 overflow-hidden relative shadow-xl h-full"
                         >
-                            <div className="absolute top-0 right-0 w-40 h-40 bg-brand-purple/20 blur-3xl" />
-                            <div className="absolute bottom-0 left-0 w-40 h-40 bg-brand-blue/20 blur-3xl" />
+                            <div className="absolute top-0 right-0 w-40 h-40 bg-brand-purple/5 blur-3xl" />
+                            <div className="absolute bottom-0 left-0 w-40 h-40 bg-brand-blue/5 blur-3xl" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-2xl md:text-3xl font-bold text-white font-malayalam leading-tight flex items-center gap-3">
-                                        <span className="w-1.5 h-10 bg-brand-blue rounded-full"></span>
+                                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-malayalam leading-tight flex items-center gap-3">
+                                        <span className="w-1.5 h-10 brand-gradient rounded-full"></span>
                                         പ്രിയമുള്ളവരെ…
                                     </h2>
                                     <button
                                         onClick={toggleWelcome}
-                                        className="p-2 rounded-lg bg-brand-lavender/50 hover:bg-brand-lavender border border-brand-purple/20 hover:border-brand-purple/40 transition-all group"
+                                        className="p-2 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200 transition-all group"
                                         title={isWelcomeExpanded ? "Hide Message" : "Show Message"}
                                     >
                                         <svg
@@ -298,14 +298,14 @@ const Dashboard: React.FC = () => {
                                             transition={{ duration: 0.3 }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="space-y-4 text-gray-200 leading-relaxed text-base md:text-lg font-malayalam">
-                                                <p className="hover:text-white transition-colors">
+                                            <div className="space-y-4 text-gray-600 leading-relaxed text-base md:text-lg font-malayalam">
+                                                <p className="hover:text-gray-900 transition-colors">
                                                     നമ്മുടെ നാട്ടിലെ സാമൂഹിക സാംസ്‌കാരിക സേവന രംഗത്ത് സജീവമായി പ്രവർത്തിക്കുന്ന സംഘടനയാണ് തച്ച നാട്ടുകര പാലിയേറ്റീവ് കെയർ സൊസൈറ്റി.
                                                 </p>
-                                                <p className="hover:text-gray-200 transition-colors">
+                                                <p className="hover:text-gray-900 transition-colors">
                                                     പൊതുജനങ്ങളുടെ ആരോഗ്യ സംരക്ഷണത്തിനും പുരോഗതിക്കും മാതൃകപരമായ ഇടപെടലുകൾ നടത്തി തച്ച നാട്ടുകര പാലിയേറ്റീവ് കെയർ സൊസൈറ്റി അതിന്റെ പ്രയാണം നടത്തികൊണ്ടിരിക്കുകയാണ്.
                                                 </p>
-                                                <p className="font-semibold text-brand-lavender hover:text-white transition-colors bg-white/5 border-l-4 border-brand-purple pl-4 py-2 rounded-r-lg">
+                                                <p className="font-semibold text-brand-purple hover:text-brand-deep-violet transition-colors bg-brand-lavender/30 border-l-4 border-brand-purple pl-4 py-2 rounded-r-lg">
                                                     തുടർന്നും ഇത്തരം പ്രവർത്തനങ്ങൾക്കും പ്രയത്നങ്ങൾക്കും ശക്തി പകരാൻ പാലിയേറ്റീവ് കെയർ സൊസൈറ്റിയുടെ "Dates Challenge" -ൽ പങ്കാളികളാവണമെന്ന് വിനീതമായി അഭ്യർത്ഥിക്കുന്നു
                                                 </p>
 
@@ -339,8 +339,8 @@ const Dashboard: React.FC = () => {
 
                 {/* Auto-Changing Carousel */}
                 <div className="space-y-4">
-                    <h3 className="text-xl font-bold text-white pl-2 border-l-4 border-brand-blue">Gallery</h3>
-                    <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden shadow-lg border border-white/20 group">
+                    <h3 className="text-xl font-bold text-gray-900 pl-2 border-l-4 border-brand-blue">Gallery</h3>
+                    <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden shadow-lg border border-gray-200 group">
                         {/* Carousel Images */}
                         <AnimatePresence mode="wait">
                             <motion.div
@@ -403,10 +403,10 @@ const Dashboard: React.FC = () => {
                 </div>
 
                 {/* Live Unit Stats - Professional Design */}
-                <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl">
+                <div className="bg-white border border-gray-100 rounded-3xl p-6 md:p-8 shadow-xl">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="w-1 h-8 bg-brand-purple rounded-full" />
-                        <h2 className="text-2xl md:text-3xl font-bold text-white">
+                        <div className="w-1 h-8 brand-gradient rounded-full" />
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
                             Unit Wise Collection
                         </h2>
                     </div>
@@ -433,11 +433,11 @@ const Dashboard: React.FC = () => {
                                 };
 
                                 const getBgColor = () => {
-                                    if (isFirst) return 'bg-yellow-400/20';
-                                    if (isSecond) return 'bg-brand-purple/30';
-                                    if (isThird) return 'bg-brand-blue/30';
-                                    if (isActive) return 'bg-brand-purple/10';
-                                    return 'bg-white/5';
+                                    if (isFirst) return 'bg-yellow-400/10';
+                                    if (isSecond) return 'bg-brand-purple/5';
+                                    if (isThird) return 'bg-brand-blue/5';
+                                    if (isActive) return 'bg-gray-50';
+                                    return 'bg-gray-100/50';
                                 };
 
                                 const getRankBadge = () => {
@@ -448,10 +448,10 @@ const Dashboard: React.FC = () => {
                                 };
 
                                 const getAmountColor = () => {
-                                    if (isFirst) return 'text-yellow-400';
-                                    if (isSecond) return 'text-brand-lavender';
+                                    if (isFirst) return 'text-yellow-600';
+                                    if (isSecond) return 'text-brand-purple';
                                     if (isThird) return 'text-brand-blue';
-                                    if (isActive) return 'text-brand-lavender';
+                                    if (isActive) return 'text-gray-900';
                                     return 'text-gray-400';
                                 };
 
@@ -476,7 +476,7 @@ const Dashboard: React.FC = () => {
 
                                         {/* Content */}
                                         <div>
-                                            <p className="text-gray-300 text-xs uppercase tracking-wider mb-3 font-semibold">
+                                            <p className="text-gray-500 text-xs uppercase tracking-wider mb-3 font-semibold">
                                                 {ward.name}
                                             </p>
                                             <p className={`text-3xl font-bold ${getAmountColor()}`}>
@@ -498,7 +498,7 @@ const Dashboard: React.FC = () => {
                         whileHover={{ scale: 1.05, y: -5 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setShowModal(true)}
-                        className="pointer-events-auto bg-brand-purple text-white font-bold text-lg md:text-xl py-4 px-12 rounded-full shadow-2xl shadow-brand-purple/40 hover:shadow-brand-purple/60 border border-brand-purple/30 backdrop-blur-sm flex items-center gap-2"
+                        className="pointer-events-auto brand-gradient text-white font-bold text-lg md:text-xl py-4 px-12 rounded-full shadow-2xl shadow-brand-purple/40 hover:shadow-brand-purple/60 border border-white/20 backdrop-blur-sm flex items-center gap-2"
                     >
                         Participate
                     </motion.button>
@@ -541,18 +541,18 @@ const InstallPrompt = () => {
         >
             <div
                 onClick={() => navigate('/install-app')}
-                className="bg-gradient-to-r from-brand-blue/20 to-brand-purple/20 backdrop-blur-md border border-white/10 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-all group"
+                className="bg-gray-50 backdrop-blur-md border border-gray-200 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-gray-100 transition-all group shadow-sm"
             >
                 <div className="flex items-center gap-4">
-                    <div className="bg-white/10 p-3 rounded-lg group-hover:scale-110 transition-transform">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-lavender"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
+                    <div className="bg-brand-lavender/30 p-3 rounded-lg group-hover:scale-110 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-purple"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
                     </div>
                     <div>
-                        <h3 className="text-white font-bold text-sm md:text-base">Install App</h3>
-                        <p className="text-brand-lavender/70 text-xs md:text-sm">Get the best experience by installing our app</p>
+                        <h3 className="text-gray-900 font-bold text-sm md:text-base">Install App</h3>
+                        <p className="text-gray-500 text-xs md:text-sm">Get the best experience by installing our app</p>
                     </div>
                 </div>
-                <div className="bg-brand-purple px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:bg-brand-deep-violet transition-colors">
+                <div className="brand-gradient px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:opacity-90 transition-colors">
                     INSTALL
                 </div>
             </div>

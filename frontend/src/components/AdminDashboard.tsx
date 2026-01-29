@@ -119,10 +119,10 @@ const AdminDashboard: React.FC = () => {
     };
 
     return (
-        <div className="p-6 max-w-7xl mx-auto min-h-screen pb-24 space-y-8 bg-brand-lavender text-gray-900">
+        <div className="p-6 max-w-7xl mx-auto min-h-screen pb-24 space-y-8 bg-white text-gray-900">
             <header className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-brand-purple">
+                    <h1 className="text-2xl font-bold text-brand-blue">
                         Admin Dashboard
                     </h1>
                     <p className="text-gray-500 text-sm">Overview & Management</p>
@@ -131,13 +131,13 @@ const AdminDashboard: React.FC = () => {
                     <div className="flex bg-white p-1 rounded-lg border border-brand-purple/20">
                         <button
                             onClick={() => setActiveTab('analytics')}
-                            className={`px-4 py-2 rounded-md text-sm transition-colors ${activeTab === 'analytics' ? 'bg-brand-purple text-white' : 'text-gray-600 hover:text-gray-900'}`}
+                            className={`px-4 py-2 rounded-md text-sm transition-colors ${activeTab === 'analytics' ? 'brand-gradient text-white' : 'text-gray-600 hover:text-gray-900'}`}
                         >
                             Analytics
                         </button>
                         <button
                             onClick={() => setActiveTab('payments')}
-                            className={`px-4 py-2 rounded-md text-sm transition-colors ${activeTab === 'payments' ? 'bg-brand-purple text-white' : 'text-gray-600 hover:text-gray-900'}`}
+                            className={`px-4 py-2 rounded-md text-sm transition-colors ${activeTab === 'payments' ? 'brand-gradient text-white' : 'text-gray-600 hover:text-gray-900'}`}
                         >
                             Payments
                         </button>
@@ -204,7 +204,7 @@ const AdminDashboard: React.FC = () => {
                                             itemStyle={{ color: '#1e293b' }}
                                             formatter={(value?: number) => [`₹${(value || 0).toLocaleString()}`, 'Revenue']}
                                         />
-                                        <Bar dataKey="amount" fill="#6A2C91" radius={[0, 4, 4, 0]} barSize={20} />
+                                        <Bar dataKey="amount" fill="#3052a1" radius={[0, 4, 4, 0]} barSize={20} />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </div>
@@ -224,7 +224,7 @@ const AdminDashboard: React.FC = () => {
                                             itemStyle={{ color: '#1e293b' }}
                                             formatter={(value?: number) => [`₹${(value || 0).toLocaleString()}`, 'Revenue']}
                                         />
-                                        <Line type="monotone" dataKey="amount" stroke="#6A2C91" strokeWidth={3} dot={{ fill: '#6A2C91' }} />
+                                        <Line type="monotone" dataKey="amount" stroke="#6c308b" strokeWidth={3} dot={{ fill: '#6c308b' }} />
                                     </LineChart>
                                 </ResponsiveContainer>
                             </div>
@@ -295,7 +295,7 @@ const AdminDashboard: React.FC = () => {
                                                 <td className="p-4 text-gray-600 font-mono">{p.mobile}</td>
                                                 <td className="p-4 text-gray-600">{p.ward}</td>
                                                 <td className="p-4 text-gray-600">{p.quantity}</td>
-                                                <td className="p-4 text-brand-purple font-bold">₹{p.amount}</td>
+                                                <td className="p-4 text-brand-blue font-bold">₹{p.amount}</td>
                                                 <td className="p-4">
                                                     <span className={`px-2 py-1 rounded-full text-xs font-semibold ${p.status === 'success'
                                                         ? 'bg-brand-purple/10 text-brand-purple'

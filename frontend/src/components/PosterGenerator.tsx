@@ -346,7 +346,7 @@ const PosterGenerator: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-brand-lavender text-gray-900 p-4 flex flex-col items-center">
+        <div className="min-h-screen bg-white text-gray-900 p-4 flex flex-col items-center">
 
             {/* Cropper Modal */}
             {isCropping && tempImage && (
@@ -388,7 +388,7 @@ const PosterGenerator: React.FC = () => {
                             </button>
                             <button
                                 onClick={showCroppedImage}
-                                className="flex-1 py-3 px-4 rounded-xl bg-brand-purple text-white font-bold hover:bg-brand-deep-violet transition-colors flex items-center justify-center gap-2"
+                                className="flex-1 py-3 px-4 rounded-xl brand-gradient text-white font-bold hover:opacity-90 transition-colors flex items-center justify-center gap-2"
                             >
                                 <Check className="w-5 h-5" /> Confirm Crop
                             </button>
@@ -405,7 +405,7 @@ const PosterGenerator: React.FC = () => {
                 <ArrowLeft className="w-5 h-5" /> Back
             </button>
 
-            <h1 className="text-2xl font-bold text-brand-purple mb-6 text-center">
+            <h1 className="text-2xl font-bold text-brand-blue mb-6 text-center">
                 Poster Generator
             </h1>
 
@@ -459,7 +459,7 @@ const PosterGenerator: React.FC = () => {
                 <button
                     onClick={handleDownload}
                     disabled={!isCanvasReady || !userImage}
-                    className="flex-1 bg-white hover:bg-brand-lavender text-brand-purple border border-brand-purple/20 font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95"
+                    className="flex-1 bg-white hover:bg-white text-brand-purple border border-brand-purple/20 font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95"
                 >
                     {isGenerating ? <Loader2 className="animate-spin" /> : <Download />}
                     {isGenerating ? 'Wait...' : 'Download'}
@@ -467,7 +467,7 @@ const PosterGenerator: React.FC = () => {
                 <button
                     onClick={handleShare}
                     disabled={!isCanvasReady || !userImage}
-                    className="flex-1 bg-brand-purple hover:bg-brand-deep-violet text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95"
+                    className="flex-1 brand-gradient hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95"
                 >
                     {isGenerating ? <Loader2 className="animate-spin" /> : <Share2 />}
                     {isGenerating ? 'Wait...' : 'Share'}

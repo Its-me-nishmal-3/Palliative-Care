@@ -39,14 +39,14 @@ const AdminLogin: React.FC = () => {
                 <h1 className="text-2xl font-bold mb-6 text-center">Admin Login</h1>
 
                 {error && (
-                    <div className="bg-red-500/20 text-red-200 p-3 rounded-lg mb-4 text-sm text-center">
+                    <div className="bg-red-50 text-red-600 border border-red-100 p-3 rounded-lg mb-4 text-sm text-center font-medium">
                         {error}
                     </div>
                 )}
 
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>
-                        <label className="block text-sm text-gray-400 mb-1">Username</label>
+                        <label className="block text-sm text-gray-500 mb-1">Username</label>
                         <input
                             type="text"
                             value={username}
@@ -55,7 +55,7 @@ const AdminLogin: React.FC = () => {
                         />
                     </div>
                     <div>
-                        <label className="block text-sm text-gray-400 mb-1">Password</label>
+                        <label className="block text-sm text-gray-500 mb-1">Password</label>
                         <input
                             type="password"
                             value={password}
@@ -65,7 +65,7 @@ const AdminLogin: React.FC = () => {
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-brand-blue hover:bg-blue-500 text-white font-bold py-3 rounded-xl mt-4"
+                        className="w-full brand-gradient hover:opacity-90 text-white font-bold py-3 rounded-xl mt-4 shadow-lg transition-all active:scale-95"
                     >
                         Login
                     </button>

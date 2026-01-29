@@ -205,14 +205,14 @@ const NameWithPoster: React.FC = () => {
     // Return nothing if type=image (image generation happens in useEffect)
     if (typeParam === 'image') {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-brand-lavender">
+            <div className="min-h-screen flex items-center justify-center bg-white">
                 <Loader2 size={40} className="animate-spin text-blue-600" />
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-brand-lavender">
+        <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-white">
             {!generated ? (
                 <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
                     <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
@@ -236,7 +236,7 @@ const NameWithPoster: React.FC = () => {
                         <button
                             onClick={handleGenerate}
                             disabled={!name.trim()}
-                            className="w-full bg-brand-purple hover:bg-brand-deep-violet text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
+                            className="w-full brand-gradient hover:opacity-90 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
                         >
                             Generate Poster
                         </button>
@@ -292,7 +292,7 @@ const NameWithPoster: React.FC = () => {
                         <button
                             onClick={handleDownload}
                             disabled={isProcessing}
-                            className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-brand-purple text-white rounded-xl hover:bg-brand-deep-violet transition-all shadow-lg font-bold active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="flex-1 flex items-center justify-center gap-2 px-6 py-3 brand-gradient text-white rounded-xl hover:opacity-90 transition-all shadow-lg font-bold active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             {isProcessing ? (
                                 <>
@@ -307,7 +307,7 @@ const NameWithPoster: React.FC = () => {
                         <button
                             onClick={handleShare}
                             disabled={isProcessing}
-                            className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-brand-purple text-white rounded-xl hover:bg-brand-deep-violet transition-all shadow-lg font-bold active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="flex-1 flex items-center justify-center gap-2 px-6 py-3 brand-gradient text-white rounded-xl hover:opacity-90 transition-all shadow-lg font-bold active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             {isProcessing ? <Loader2 size={20} className="animate-spin" /> : <Share2 size={20} />} Share
                         </button>
@@ -318,7 +318,7 @@ const NameWithPoster: React.FC = () => {
                             setGenerated(false);
                             setName('');
                         }}
-                        className="mt-4 bg-brand-deep-violet hover:bg-brand-deep-violet/90 text-white font-bold py-3 px-6 rounded-xl transition-colors"
+                        className="mt-4 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition-colors"
                     >
                         Generate Another
                     </button>

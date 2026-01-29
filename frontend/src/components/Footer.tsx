@@ -5,7 +5,7 @@ import logo from '../assets/logo.jpeg';
 
 const Footer = () => {
     return (
-        <footer className="bg-brand-deep-violet text-white py-12 mt-12 shadow-2xl">
+        <footer className="brand-gradient text-white py-12 mt-12 shadow-2xl">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
 

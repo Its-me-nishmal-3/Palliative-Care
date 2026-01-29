@@ -83,7 +83,7 @@ const History: React.FC = () => {
     }, [hasMore, isFetchingMore]);
 
     return (
-        <div className="min-h-screen bg-brand-lavender text-gray-900 p-6 max-w-3xl mx-auto pb-24">
+        <div className="min-h-screen bg-white text-gray-900 p-6 max-w-3xl mx-auto pb-24">
             <header className="flex items-center gap-4 mb-6 bg-white border border-brand-purple/10 p-4 rounded-2xl shadow-lg">
                 <button
                     onClick={() => navigate('/')}
@@ -133,7 +133,7 @@ const History: React.FC = () => {
                                         <p className="text-xs text-gray-500 font-mono mt-1">{item.paymentId}</p>
                                     </div>
                                     <div className="text-right">
-                                        <p className="text-brand-purple font-bold text-lg">₹{item.amount}</p>
+                                        <p className="text-brand-blue font-bold text-lg">₹{item.amount}</p>
                                         <button
                                             onClick={() => navigate('/receipt', { state: { payment: item } })}
                                             className="text-xs text-brand-teal hover:text-brand-purple mt-1 flex items-center justify-end gap-1 font-medium"
