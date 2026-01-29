@@ -145,23 +145,16 @@ const Dashboard: React.FC = () => {
                     </div>
                     <div className="flex gap-3 md:gap-4 items-center">
                         <button
-                            onClick={() => navigate('/install-app')}
-                            className="flex flex-col items-center group"
-                            title="Install App"
-                        >
-                            <span className="text-xs text-brand-lavender font-semibold mb-0.5 group-hover:text-white transition-colors">Use as App</span>
-                            <div className="bg-white/10 p-1.5 rounded-lg hover:bg-white/20 transition-all border border-white/10 group-hover:scale-110 group-hover:border-white/30">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:text-white"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
-                            </div>
-                        </button>
-                        <button
                             onClick={() => navigate('/history')}
-                            className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm transition-all border border-white/10 hover:border-white/30 h-10 text-white font-medium"
+                            className="px-4 py-2 bg-brand-purple hover:bg-brand-deep-violet rounded-lg text-sm transition-all h-10 text-white font-bold shadow-lg"
                         >
                             History
                         </button>
                     </div>
                 </header>
+
+                {/* Install PWA Prompt (Only if not installed) */}
+                <InstallPrompt />
 
                 {/* Main Stats - TOP PRIORITY */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
@@ -519,6 +512,51 @@ const Dashboard: React.FC = () => {
                 {showModal && <PaymentModal onClose={() => setShowModal(false)} />}
             </AnimatePresence>
         </div>
+    );
+};
+
+// Internal Component for Install Prompt logic
+const InstallPrompt = () => {
+    const navigate = useNavigate();
+    const [isPWA, setIsPWA] = useState(false);
+
+    useEffect(() => {
+        const checkPWA = () => {
+            const isStandAlone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone;
+            setIsPWA(isStandAlone);
+        };
+
+        checkPWA();
+        window.addEventListener('resize', checkPWA); // Re-check on likely orientation/display changes
+        return () => window.removeEventListener('resize', checkPWA);
+    }, []);
+
+    if (isPWA) return null;
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            className="w-full"
+        >
+            <div
+                onClick={() => navigate('/install-app')}
+                className="bg-gradient-to-r from-brand-blue/20 to-brand-purple/20 backdrop-blur-md border border-white/10 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-all group"
+            >
+                <div className="flex items-center gap-4">
+                    <div className="bg-white/10 p-3 rounded-lg group-hover:scale-110 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-lavender"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
+                    </div>
+                    <div>
+                        <h3 className="text-white font-bold text-sm md:text-base">Install App</h3>
+                        <p className="text-brand-lavender/70 text-xs md:text-sm">Get the best experience by installing our app</p>
+                    </div>
+                </div>
+                <div className="bg-brand-purple px-4 py-2 rounded-lg text-xs font-bold text-white shadow-md hover:bg-brand-deep-violet transition-colors">
+                    INSTALL
+                </div>
+            </div>
+        </motion.div>
     );
 };
 
