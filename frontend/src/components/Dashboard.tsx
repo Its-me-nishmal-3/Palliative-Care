@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import PaymentModal from './PaymentModal';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useSpring, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { IndianRupee, Trophy, Crown } from 'lucide-react';
 
@@ -35,6 +35,38 @@ interface Stats {
     totalCount: number;
     wardWise: Record<string, number>;
 }
+
+const AnimatedNumber: React.FC<{ value: number; prefix?: string }> = ({ value, prefix = '' }) => {
+    const springValue = useSpring(0, {
+        stiffness: 40,
+        damping: 20,
+        restDelta: 0.001
+    });
+
+    useEffect(() => {
+        springValue.set(value);
+    }, [value, springValue]);
+
+    const displayValue = useTransform(springValue, (latest) => {
+        const rounded = Math.floor(latest);
+        return `${prefix}${rounded.toLocaleString()}`;
+    });
+
+    // We use a ref and useMotionValueEvent to handle the text update manually for best performance
+    // and to avoid React render cycle overhead for small animations.
+    const ref = React.useRef<HTMLSpanElement>(null);
+
+    useEffect(() => {
+        const unsubscribe = displayValue.on("change", (latest) => {
+            if (ref.current) {
+                ref.current.textContent = latest;
+            }
+        });
+        return unsubscribe;
+    }, [displayValue]);
+
+    return <span ref={ref}>{prefix}0</span>;
+};
 
 const Dashboard: React.FC = () => {
     const navigate = useNavigate();
@@ -173,7 +205,7 @@ const Dashboard: React.FC = () => {
                                 Total Collected
                             </h3>
                             <p className="text-5xl md:text-6xl font-extrabold text-brand-blue drop-shadow-sm">
-                                ₹{stats.totalAmount.toLocaleString()}
+                                <AnimatedNumber value={stats.totalAmount} prefix="₹" />
                             </p>
                         </div>
                         <div className="absolute bottom-0 left-0 w-full h-1.5 brand-gradient animate-pulse" />
@@ -194,7 +226,7 @@ const Dashboard: React.FC = () => {
                                 Total Packs
                             </h3>
                             <p className="text-5xl md:text-6xl font-extrabold text-brand-purple drop-shadow-sm">
-                                {stats.totalCount}
+                                <AnimatedNumber value={stats.totalCount} />
                             </p>
                         </div>
                         <div className="absolute bottom-0 left-0 w-full h-1.5 brand-gradient animate-pulse" />
@@ -222,7 +254,7 @@ const Dashboard: React.FC = () => {
                                         <div className="flex items-center gap-4">
                                             <div className={`
                                                 w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm shadow-sm
-                                                ${index === 0 ? 'bg-yellow-400 text-white' : 'bg-brand-blue text-white'}
+                                                ${index === 0 ? 'bg-yellow-400 text-white' : index === 1 ? 'bg-brand-purple text-white' : 'bg-brand-blue text-white'}
                                             `}>
                                                 {index + 1}
                                             </div>
