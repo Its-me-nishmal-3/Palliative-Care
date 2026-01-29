@@ -165,17 +165,15 @@ const Dashboard: React.FC = () => {
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 space-y-8 pt-8">
                 {/* Header */}
-                <header className="flex justify-between items-center backdrop-blur-xl bg-white/70 p-3 md:p-4 rounded-2xl border border-gray-200 sticky top-4 z-50 shadow-lg">
-                    <div className="flex items-center gap-3">
-                        <img src={logo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover shadow-md border border-gray-100" />
-                        <div>
-                            <h1 className="text-lg md:text-2xl font-bold text-gray-900 drop-shadow-sm leading-tight">
+                <header className="flex justify-center items-center backdrop-blur-xl bg-white/70 p-1 rounded-2xl sticky top-2 z-50">
+                    <div className="flex flex-col items-center gap-0">
+                        <img src={logo} alt="Logo" className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover" />
+                        <div className="text-center -mt-2">
+                            <h1 className="text-base md:text-xl font-extrabold text-gray-900 leading-none">
                                 Thachanattukara Palliative Care Society
                             </h1>
-                            <p className="text-brand-blue text-[10px] md:text-xs font-bold uppercase tracking-wider">DATES CHALLENGE</p>
+                            <p className="text-brand-blue text-[9px] md:text-[11px] font-black uppercase tracking-tighter">DATES CHALLENGE</p>
                         </div>
-                    </div>
-                    <div className="flex gap-3 md:gap-4 items-center">
                     </div>
                 </header>
 
