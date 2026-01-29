@@ -9,9 +9,10 @@ export default {
             colors: {
                 glass: "rgba(255, 255, 255, 0.1)",
                 brand: {
-                    purple: '#6A2C91',
+                    purple: '#6c308b', // Updated to user request
+                    blue: '#3052a1',   // New primary blue
                     lavender: '#E8DFF1',
-                    'deep-violet': '#4B1F66',
+                    'deep-violet': '#3E1C55', // Darker shade of brand.purple
                     teal: '#4FB6A3',
                     palm: '#4C8C4A'
                 },

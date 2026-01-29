@@ -122,7 +122,7 @@ const Dashboard: React.FC = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-brand-lavender text-gray-900 font-sans selection:bg-brand-purple/20 pb-24 relative overflow-hidden">
+        <div className="min-h-screen bg-transparent text-white font-sans selection:bg-brand-purple/50 pb-24 relative overflow-hidden">
 
             {/* Enhanced Background Effects */}
             <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
@@ -133,14 +133,14 @@ const Dashboard: React.FC = () => {
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 space-y-8 pt-8">
                 {/* Header */}
-                <header className="flex justify-between items-center backdrop-blur-xl bg-white/80 p-3 md:p-4 rounded-2xl border border-brand-purple/10 sticky top-4 z-50 shadow-xl">
+                <header className="flex justify-between items-center backdrop-blur-xl bg-white/10 p-3 md:p-4 rounded-2xl border border-white/10 sticky top-4 z-50 shadow-xl">
                     <div className="flex items-center gap-3">
-                        <img src={logo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover shadow-md border border-brand-purple/10" />
+                        <img src={logo} alt="Logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover shadow-md border border-white/20" />
                         <div>
-                            <h1 className="text-lg md:text-2xl font-bold bg-clip-text text-transparent bg-brand-purple drop-shadow-sm leading-tight">
+                            <h1 className="text-lg md:text-2xl font-bold text-white drop-shadow-sm leading-tight">
                                 Thachanattukara Palliative Care Society
                             </h1>
-                            <p className="text-gray-600 text-[10px] md:text-xs font-medium uppercase tracking-wider">DATES CHALLENGE</p>
+                            <p className="text-gray-300 text-[10px] md:text-xs font-medium uppercase tracking-wider">DATES CHALLENGE</p>
                         </div>
                     </div>
                     <div className="flex gap-3 md:gap-4 items-center">
@@ -149,14 +149,14 @@ const Dashboard: React.FC = () => {
                             className="flex flex-col items-center group"
                             title="Install App"
                         >
-                            <span className="text-xs text-brand-purple font-semibold mb-0.5 group-hover:text-brand-deep-violet transition-colors">Use as App</span>
-                            <div className="bg-brand-lavender p-1.5 rounded-lg hover:bg-brand-purple/10 transition-all border border-brand-purple/20 group-hover:scale-110 group-hover:border-brand-purple/40">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-purple group-hover:text-brand-deep-violet"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
+                            <span className="text-xs text-brand-lavender font-semibold mb-0.5 group-hover:text-white transition-colors">Use as App</span>
+                            <div className="bg-white/10 p-1.5 rounded-lg hover:bg-white/20 transition-all border border-white/10 group-hover:scale-110 group-hover:border-white/30">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:text-white"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
                             </div>
                         </button>
                         <button
                             onClick={() => navigate('/history')}
-                            className="px-4 py-2 bg-brand-lavender hover:bg-brand-purple/10 rounded-lg text-sm transition-all border border-brand-purple/20 hover:border-brand-purple/40 h-10 text-brand-purple font-medium"
+                            className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm transition-all border border-white/10 hover:border-white/30 h-10 text-white font-medium"
                         >
                             History
                         </button>
@@ -169,17 +169,17 @@ const Dashboard: React.FC = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="bg-white border border-brand-purple/10 p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:shadow-2xl hover:shadow-brand-purple/10 transition-all duration-300"
+                        className="bg-white/10 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:shadow-2xl hover:shadow-brand-purple/20 transition-all duration-300"
                     >
                         <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <IndianRupee className="w-20 h-20 text-brand-purple" />
+                            <IndianRupee className="w-20 h-20 text-white" />
                         </div>
                         <div className="relative z-10">
-                            <h3 className="text-brand-purple text-xs md:text-sm uppercase tracking-widest font-bold mb-2 flex items-center gap-2">
-                                <span className="w-2 h-2 bg-brand-teal rounded-full animate-pulse"></span>
+                            <h3 className="text-brand-lavender text-xs md:text-sm uppercase tracking-widest font-bold mb-2 flex items-center gap-2">
+                                <span className="w-2 h-2 bg-brand-blue rounded-full animate-pulse"></span>
                                 Total Collected
                             </h3>
-                            <p className="text-5xl md:text-6xl font-extrabold text-brand-deep-violet drop-shadow-sm">
+                            <p className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-sm">
                                 ₹{stats.totalAmount.toLocaleString()}
                             </p>
                         </div>
@@ -190,17 +190,17 @@ const Dashboard: React.FC = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="bg-white border border-brand-teal/20 p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:shadow-2xl hover:shadow-brand-teal/10 transition-all duration-300"
+                        className="bg-white/10 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-300"
                     >
                         <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <svg className="w-20 h-20 text-brand-teal" fill="currentColor" viewBox="0 0 20 20"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" /></svg>
+                            <svg className="w-20 h-20 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" /></svg>
                         </div>
                         <div className="relative z-10">
-                            <h3 className="text-brand-teal text-xs md:text-sm uppercase tracking-widest font-bold mb-2 flex items-center gap-2">
-                                <span className="w-2 h-2 bg-brand-teal rounded-full animate-pulse"></span>
+                            <h3 className="text-brand-lavender text-xs md:text-sm uppercase tracking-widest font-bold mb-2 flex items-center gap-2">
+                                <span className="w-2 h-2 bg-brand-blue rounded-full animate-pulse"></span>
                                 Total Packs
                             </h3>
-                            <p className="text-5xl md:text-6xl font-extrabold text-brand-deep-violet drop-shadow-sm">
+                            <p className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-sm">
                                 {stats.totalCount}
                             </p>
                         </div>
@@ -215,38 +215,38 @@ const Dashboard: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="w-full max-w-4xl mx-auto mb-12"
                     >
-                        <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 border border-brand-purple/10 shadow-xl">
+                        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-xl">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="p-2 bg-yellow-100 rounded-lg border border-yellow-200">
-                                    <Trophy className="text-yellow-600 w-6 h-6" />
+                                <div className="p-2 bg-yellow-400/20 rounded-lg border border-yellow-400/30">
+                                    <Trophy className="text-yellow-400 w-6 h-6" />
                                 </div>
-                                <h2 className="text-xl font-bold text-brand-deep-violet">Today's Toppers</h2>
+                                <h2 className="text-xl font-bold text-white">Today's Toppers</h2>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                 {todaysToppers.map((topper, index) => (
-                                    <div key={topper._id} className="relative bg-white rounded-xl p-4 border border-sky-50 hover:border-sky-200 hover:shadow-lg transition-all flex items-center justify-between group">
+                                    <div key={topper._id} className="relative bg-white/5 rounded-xl p-4 border border-white/10 hover:border-white/20 hover:shadow-lg transition-all flex items-center justify-between group">
                                         <div className="flex items-center gap-4">
                                             <div className={`
                                                 w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm shadow-sm
-                                                ${index === 0 ? 'bg-yellow-100 text-yellow-700 border border-yellow-200' :
-                                                    index === 1 ? 'bg-gray-100 text-gray-700 border border-gray-200' :
-                                                        index === 2 ? 'bg-orange-100 text-orange-700 border border-orange-200' : 'bg-sky-50 text-sky-600 border border-sky-100'}
+                                                ${index === 0 ? 'bg-yellow-400/20 text-yellow-400 border border-yellow-400/30' :
+                                                    index === 1 ? 'bg-gray-400/20 text-gray-200 border border-gray-400/30' :
+                                                        index === 2 ? 'bg-orange-400/20 text-orange-400 border border-orange-400/30' : 'bg-brand-blue/20 text-blue-300 border border-brand-blue/30'}
                                             `}>
                                                 {index + 1}
                                             </div>
                                             <div>
-                                                <h3 className="font-semibold text-brand-deep-violet text-sm">{topper.name}</h3>
-                                                <p className="text-xs text-gray-500">{topper.ward}</p>
+                                                <h3 className="font-semibold text-white text-sm">{topper.name}</h3>
+                                                <p className="text-xs text-gray-400">{topper.ward}</p>
                                                 <div className="flex gap-2 mt-1">
-                                                    <span className="text-xs font-bold text-brand-purple">{topper.totalQuantity} Packs</span>
-                                                    <span className="text-xs font-bold text-gray-400">|</span>
-                                                    <span className="text-xs font-bold text-brand-teal">₹{topper.totalAmount}</span>
+                                                    <span className="text-xs font-bold text-brand-lavender">{topper.totalQuantity} Packs</span>
+                                                    <span className="text-xs font-bold text-gray-500">|</span>
+                                                    <span className="text-xs font-bold text-brand-blue">₹{topper.totalAmount}</span>
                                                 </div>
                                             </div>
                                         </div>
                                         {index === 0 && (
-                                            <Crown className="w-5 h-5 text-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity absolute top-2 right-2 rotate-12" />
+                                            <Crown className="w-5 h-5 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity absolute top-2 right-2 rotate-12" />
                                         )}
                                     </div>
                                 ))}
@@ -264,15 +264,15 @@ const Dashboard: React.FC = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="bg-white border border-brand-purple/10 rounded-3xl p-6 md:p-8 overflow-hidden relative shadow-xl h-full"
+                            className="bg-white/10 border border-white/10 rounded-3xl p-6 md:p-8 overflow-hidden relative shadow-xl h-full backdrop-blur-md"
                         >
-                            <div className="absolute top-0 right-0 w-40 h-40 bg-brand-purple/5 blur-3xl" />
-                            <div className="absolute bottom-0 left-0 w-40 h-40 bg-brand-teal/5 blur-3xl" />
+                            <div className="absolute top-0 right-0 w-40 h-40 bg-brand-purple/20 blur-3xl" />
+                            <div className="absolute bottom-0 left-0 w-40 h-40 bg-brand-blue/20 blur-3xl" />
 
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-2xl md:text-3xl font-bold text-brand-deep-violet font-malayalam leading-tight flex items-center gap-3">
-                                        <span className="w-1.5 h-10 bg-brand-purple rounded-full"></span>
+                                    <h2 className="text-2xl md:text-3xl font-bold text-white font-malayalam leading-tight flex items-center gap-3">
+                                        <span className="w-1.5 h-10 bg-brand-blue rounded-full"></span>
                                         പ്രിയമുള്ളവരെ…
                                     </h2>
                                     <button
@@ -305,14 +305,14 @@ const Dashboard: React.FC = () => {
                                             transition={{ duration: 0.3 }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg font-malayalam">
-                                                <p className="hover:text-gray-900 transition-colors">
+                                            <div className="space-y-4 text-gray-200 leading-relaxed text-base md:text-lg font-malayalam">
+                                                <p className="hover:text-white transition-colors">
                                                     നമ്മുടെ നാട്ടിലെ സാമൂഹിക സാംസ്‌കാരിക സേവന രംഗത്ത് സജീവമായി പ്രവർത്തിക്കുന്ന സംഘടനയാണ് തച്ച നാട്ടുകര പാലിയേറ്റീവ് കെയർ സൊസൈറ്റി.
                                                 </p>
-                                                <p className="hover:text-gray-600 transition-colors">
+                                                <p className="hover:text-gray-200 transition-colors">
                                                     പൊതുജനങ്ങളുടെ ആരോഗ്യ സംരക്ഷണത്തിനും പുരോഗതിക്കും മാതൃകപരമായ ഇടപെടലുകൾ നടത്തി തച്ച നാട്ടുകര പാലിയേറ്റീവ് കെയർ സൊസൈറ്റി അതിന്റെ പ്രയാണം നടത്തികൊണ്ടിരിക്കുകയാണ്.
                                                 </p>
-                                                <p className="font-semibold text-brand-purple hover:text-brand-deep-violet transition-colors bg-brand-lavender/50 border-l-4 border-brand-purple pl-4 py-2 rounded-r-lg">
+                                                <p className="font-semibold text-brand-lavender hover:text-white transition-colors bg-white/5 border-l-4 border-brand-purple pl-4 py-2 rounded-r-lg">
                                                     തുടർന്നും ഇത്തരം പ്രവർത്തനങ്ങൾക്കും പ്രയത്നങ്ങൾക്കും ശക്തി പകരാൻ പാലിയേറ്റീവ് കെയർ സൊസൈറ്റിയുടെ "Dates Challenge" -ൽ പങ്കാളികളാവണമെന്ന് വിനീതമായി അഭ്യർത്ഥിക്കുന്നു
                                                 </p>
 
@@ -346,8 +346,8 @@ const Dashboard: React.FC = () => {
 
                 {/* Auto-Changing Carousel */}
                 <div className="space-y-4">
-                    <h3 className="text-xl font-bold text-gray-800 pl-2 border-l-4 border-sky-600">Gallery</h3>
-                    <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden shadow-lg border border-sky-100 group">
+                    <h3 className="text-xl font-bold text-white pl-2 border-l-4 border-brand-blue">Gallery</h3>
+                    <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden shadow-lg border border-white/20 group">
                         {/* Carousel Images */}
                         <AnimatePresence mode="wait">
                             <motion.div
@@ -410,10 +410,10 @@ const Dashboard: React.FC = () => {
                 </div>
 
                 {/* Live Unit Stats - Professional Design */}
-                <div className="bg-white border border-brand-purple/10 rounded-3xl p-6 md:p-8 shadow-xl">
+                <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-8 shadow-xl">
                     <div className="flex items-center gap-3 mb-6">
                         <div className="w-1 h-8 bg-brand-purple rounded-full" />
-                        <h2 className="text-2xl md:text-3xl font-bold text-brand-deep-violet">
+                        <h2 className="text-2xl md:text-3xl font-bold text-white">
                             Unit Wise Collection
                         </h2>
                     </div>
@@ -434,31 +434,31 @@ const Dashboard: React.FC = () => {
                                 const getBorderColor = () => {
                                     if (isFirst) return 'border-l-4 border-yellow-400';
                                     if (isSecond) return 'border-l-4 border-brand-purple';
-                                    if (isThird) return 'border-l-4 border-brand-teal';
+                                    if (isThird) return 'border-l-4 border-brand-blue';
                                     if (isActive) return 'border-l-4 border-brand-purple/40';
-                                    return 'border-l-4 border-gray-200';
+                                    return 'border-l-4 border-white/10';
                                 };
 
                                 const getBgColor = () => {
-                                    if (isFirst) return 'bg-yellow-50';
-                                    if (isSecond) return 'bg-brand-lavender';
-                                    if (isThird) return 'bg-brand-teal/5';
-                                    if (isActive) return 'bg-brand-lavender/30';
-                                    return 'bg-white';
+                                    if (isFirst) return 'bg-yellow-400/20';
+                                    if (isSecond) return 'bg-brand-purple/30';
+                                    if (isThird) return 'bg-brand-blue/30';
+                                    if (isActive) return 'bg-brand-purple/10';
+                                    return 'bg-white/5';
                                 };
 
                                 const getRankBadge = () => {
                                     if (isFirst) return { text: '#1', color: 'bg-yellow-400 text-gray-900' };
                                     if (isSecond) return { text: '#2', color: 'bg-brand-purple text-white' };
-                                    if (isThird) return { text: '#3', color: 'bg-brand-teal text-white' };
+                                    if (isThird) return { text: '#3', color: 'bg-brand-blue text-white' };
                                     return null;
                                 };
 
                                 const getAmountColor = () => {
-                                    if (isFirst) return 'text-yellow-600';
-                                    if (isSecond) return 'text-brand-purple';
-                                    if (isThird) return 'text-brand-teal';
-                                    if (isActive) return 'text-brand-purple';
+                                    if (isFirst) return 'text-yellow-400';
+                                    if (isSecond) return 'text-brand-lavender';
+                                    if (isThird) return 'text-brand-blue';
+                                    if (isActive) return 'text-brand-lavender';
                                     return 'text-gray-400';
                                 };
 
@@ -483,13 +483,13 @@ const Dashboard: React.FC = () => {
 
                                         {/* Content */}
                                         <div>
-                                            <p className="text-gray-600 text-xs uppercase tracking-wider mb-3 font-semibold">
+                                            <p className="text-gray-300 text-xs uppercase tracking-wider mb-3 font-semibold">
                                                 {ward.name}
                                             </p>
                                             <p className={`text-3xl font-bold ${getAmountColor()}`}>
                                                 {ward.amount}
                                             </p>
-                                            <p className="text-xs text-gray-500 mt-1">packs</p>
+                                            <p className="text-xs text-gray-400 mt-1">packs</p>
                                         </div>
 
 

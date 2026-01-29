@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-purple: #6A2C91;
+  --color-brand-purple: #6c308b;
+  --color-brand-blue: #3052a1;
   --color-brand-lavender: #E8DFF1;
-  --color-brand-deep-violet: #4B1F66;
+  --color-brand-deep-violet: #3E1C55;
   --color-brand-teal: #4FB6A3;
   --color-brand-palm: #4C8C4A;
 
   --color-date-brown: #7A3E22;
   --color-date-cocoa: #4A2514;
   --color-date-wooden: #8B5A2B;
-
   --color-neutral-grey: #B9B3C6;
 }
 
@@ -20,8 +20,8 @@
 
 body {
   font-family: var(--font-sans);
-  @apply bg-brand-lavender text-brand-purple overflow-x-hidden;
-  background: linear-gradient(135deg, #E8DFF1 0%, #C7B6DD 50%, #6A2C91 100%);
+  @apply bg-brand-purple text-white overflow-x-hidden;
+  background: linear-gradient(135deg, #3052a1 0%, #6c308b 100%);
   min-height: 100vh;
 }
 

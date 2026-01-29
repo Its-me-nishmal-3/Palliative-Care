@@ -21,7 +21,7 @@ import CancellationRefund from './components/policies/CancellationRefund';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-950 text-white font-sans selection:bg-blue-500/30 flex flex-col">
+      <div className="min-h-screen bg-transparent text-white font-sans selection:bg-brand-blue/30 flex flex-col">
         <div className="flex-grow">
           <Routes>
             <Route path="/" element={<Dashboard />} />
