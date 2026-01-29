@@ -4,7 +4,7 @@ import PaymentModal from './PaymentModal';
 
 import { motion, AnimatePresence, useSpring, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { IndianRupee, Trophy, Crown } from 'lucide-react';
+import { IndianRupee, Trophy, Crown, ChevronRight } from 'lucide-react';
 
 // Assets
 import logo from '../assets/logo.jpeg';
@@ -176,12 +176,6 @@ const Dashboard: React.FC = () => {
                         </div>
                     </div>
                     <div className="flex gap-3 md:gap-4 items-center">
-                        <button
-                            onClick={() => navigate('/history')}
-                            className="px-4 py-2 brand-gradient hover:opacity-90 rounded-lg text-sm transition-all h-10 text-white font-bold shadow-lg"
-                        >
-                            History
-                        </button>
                     </div>
                 </header>
 
@@ -229,6 +223,14 @@ const Dashboard: React.FC = () => {
                         </div>
                         <div className="absolute bottom-0 left-0 w-full h-1.5 brand-gradient animate-pulse" />
                     </motion.div>
+                </div>
+                <div className="flex justify-end px-2">
+                    <button
+                        onClick={() => navigate('/history')}
+                        className="flex items-center gap-1 text-brand-purple font-bold hover:text-brand-deep-violet transition-colors group"
+                    >
+                        View History <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
                 </div>
 
                 {/* Today's Toppers Section */}
