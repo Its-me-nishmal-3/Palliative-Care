@@ -40,6 +40,46 @@ router.post('/create-order', paymentLimiter, async (req, res) => {
         const { quantity = 1, name, mobile, ward } = req.body;
         const amount = 500 * quantity;
 
+        // Check if PAYMENT_MODE is disabled in .env
+        const isNoPaymentMode = process.env.PAYMENT_MODE === 'false';
+
+        if (isNoPaymentMode) {
+            // Bypass Razorpay: Create a successful record immediately
+            const payment = new Payment({
+                name,
+                ward,
+                amount,
+                quantity,
+                mobile,
+                paymentId: `no_pay_${Date.now()}`,
+                orderId: `no_order_${Date.now()}`,
+                status: 'success'
+            });
+            await payment.save();
+
+            // Emit Socket Update for real-time dashboard updates
+            io.emit('payment_success', {
+                amount: payment.amount,
+                ward: ward,
+                quantity: quantity,
+                payment
+            });
+
+            // Send WhatsApp notification asynchronously
+            setImmediate(() => {
+                sendWhatsAppNotification(name, quantity, amount, mobile).catch(err => {
+                    console.warn('WhatsApp notification error (No-Payment Mode):', err);
+                });
+            });
+
+            return res.json({
+                paymentMode: false,
+                status: 'success',
+                payment
+            });
+        }
+
+        // Standard Razorpay Flow
         const options = {
             amount: amount * 100, // amount in paisa
             currency: 'INR',
@@ -68,7 +108,7 @@ router.post('/create-order', paymentLimiter, async (req, res) => {
             payment
         });
 
-        res.json({ ...order, quantity });
+        res.json({ ...order, quantity, paymentMode: true });
     } catch (error) {
         console.error('Error creating order:', error);
         res.status(500).send('Error creating order');

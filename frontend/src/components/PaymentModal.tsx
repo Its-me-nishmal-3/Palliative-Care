@@ -28,7 +28,16 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ onClose }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ quantity, name, mobile, ward })
             });
-            const order = await res.json();
+            const data = await res.json();
+
+            // Check if backend is in "No-Payment Mode"
+            if (data.paymentMode === false) {
+                onClose();
+                navigate('/receipt', { state: { payment: data.payment } });
+                return;
+            }
+
+            const order = data; // Traditional Razorpay order data
 
             // 2. Open Razorpay
             const options = {
