@@ -1,6 +1,6 @@
 # Dependencies
 node_modules/
-
+ok.pdf
 # Production build
 dist/
 build/

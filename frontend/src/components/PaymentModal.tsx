@@ -22,7 +22,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ onClose }) => {
         setLoading(true);
 
         try {
-            // 1. Create Order (Sends user details to save as "Created")
+            // 1. Create Order (Federal Bank flow)
             const res = await fetch('https://palliative-care.onrender.com/api/payment/create-order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -37,72 +37,13 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ onClose }) => {
                 return;
             }
 
-            const order = data; // Traditional Razorpay order data
-
-            // 2. Open Razorpay
-            const options = {
-                key: "rzp_live_S6tX2vVKgIDjcz",
-                amount: order.amount,
-                currency: "INR",
-                name: "Thachanattukara Palliative Care Society Dates Challenge",
-                description: `Thachanattukara Palliative Care Society Dates Challenge 2026`,
-                order_id: order.id,
-                handler: async function (response: any) {
-                    // 3. Verify Payment
-                    try {
-                        const verifyRes = await fetch('https://palliative-care.onrender.com/api/payment/verify', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                razorpay_order_id: response.razorpay_order_id,
-                                razorpay_payment_id: response.razorpay_payment_id,
-                                razorpay_signature: response.razorpay_signature
-                            })
-                        });
-                        const verifyData = await verifyRes.json();
-
-                        if (verifyData.status === 'success') {
-                            onClose();
-                            navigate('/receipt', { state: { payment: verifyData.payment } });
-                        } else {
-                            alert('Payment verification failed');
-                        }
-                    } catch (verifyError) {
-                        console.error('Verification Error:', verifyError);
-                        alert('Payment verification failed during server check');
-                    }
-                },
-                prefill: {
-                    name: name,
-                    contact: mobile
-                },
-                theme: {
-                    color: "#6A2C91"
-                },
-                modal: {
-                    ondismiss: function () {
-                        setLoading(false);
-                    }
-                }
-            };
-
-            const rzp1 = new (window as any).Razorpay(options);
-            rzp1.on('payment.failed', function (response: any) {
-                // Report failure to backend
-                fetch('https://palliative-care.onrender.com/api/payment/payment-failed', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        order_id: response.error.metadata.order_id,
-                        payment_id: response.error.metadata.payment_id,
-                        reason: response.error.description
-                    })
-                });
-
-                alert(response.error.description);
+            if (data.payment_url) {
+                // 2. Redirect to Federal Bank Payment Page
+                window.location.href = data.payment_url;
+            } else {
+                alert('Failed to initiate payment. Please try again.');
                 setLoading(false);
-            });
-            rzp1.open();
+            }
         } catch (error) {
             console.error('Payment Error:', error);
             alert('Something went wrong initiating the payment');
