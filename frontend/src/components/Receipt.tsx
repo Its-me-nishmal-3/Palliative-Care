@@ -51,12 +51,12 @@ const Receipt: React.FC = () => {
                 ctx.fillText(payment.name.toUpperCase(), nameX, nameY);
 
                 // Area 2: Amount - coords (2371,4401,3857,4644)
-                const amtX = 2371;
+                const amtX = 2371 + ((3857 - 2371) / 2); // Center horizontally
                 const amtY = 4401 + ((4644 - 4401) / 2); // Center vertically
-                ctx.font = 'bold 100px Arial, sans-serif';
-                ctx.textAlign = 'left';
+                ctx.font = 'bold 160px Arial, sans-serif';
+                ctx.textAlign = 'center';
                 ctx.fillStyle = '#6c308b';
-                ctx.fillText(`₹${payment.amount || (payment.quantity * 500)}`, amtX, amtY);
+                ctx.fillText(`₹${payment.amount || (payment.quantity * 500)}/-`, amtX, amtY);
 
                 // Quantity hidden
 
@@ -126,7 +126,7 @@ const Receipt: React.FC = () => {
                         Height: (4644-4401)/5625 = 4.32%
                      */}
                     <div
-                        className="absolute flex items-center overflow-hidden"
+                        className="absolute flex items-center justify-center overflow-hidden"
                         style={{
                             left: '52.69%',
                             top: '78.24%',
@@ -135,8 +135,8 @@ const Receipt: React.FC = () => {
                             color: '#6c308b',
                         }}
                     >
-                        <span className="font-bold text-[2.5vw] sm:text-[1.8vw] md:text-xs lg:text-base text-left leading-none">
-                            {payment.amount || (payment.quantity * 500)}
+                        <span className="font-bold text-[4vw] sm:text-[3vw] md:text-xl lg:text-2xl text-center leading-none">
+                            ₹{payment.amount || (payment.quantity * 500)}/-
                         </span>
                     </div>
 
@@ -188,13 +188,14 @@ const Receipt: React.FC = () => {
 
 
                                 // Area 2: Amount - coords="2371,4401,3857,4644"
+                                // Center X: 2371 + (3857-2371)/2 = 3114
                                 // Center Y: 4401 + (4644-4401)/2 = 4522.5
-                                const amtX = 2371;
+                                const amtX = 3114;
                                 const amtY = 4522.5;
-                                ctx.font = 'bold 100px Arial, sans-serif';
-                                ctx.textAlign = 'left';
+                                ctx.font = 'bold 160px Arial, sans-serif';
+                                ctx.textAlign = 'center';
                                 ctx.fillStyle = '#6c308b';
-                                ctx.fillText(`₹${payment.amount || (payment.quantity * 500)}`, amtX, amtY);
+                                ctx.fillText(`₹${payment.amount || (payment.quantity * 500)}/-`, amtX, amtY);
 
                                 // Watermark
                                 const now = new Date();
