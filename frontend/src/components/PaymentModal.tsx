@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { X, Minus, Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 
 interface PaymentModalProps {
     onClose: () => void;
@@ -23,7 +24,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ onClose }) => {
 
         try {
             // 1. Create Order (Federal Bank flow)
-            const res = await fetch('https://palliative-care.onrender.com/api/payment/create-order', {
+            const res = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ quantity, name, mobile, ward })
@@ -151,7 +152,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ onClose }) => {
                         <button
                             onClick={handlePayment}
                             disabled={loading}
-                            className="w-full brand-gradient hover:opacity-90 text-white font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                            className="w-full bg-brand-purple hover:bg-brand-deep-violet text-white font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                         >
                             {loading ? 'Processing...' : `Pay ₹${500 * quantity}`}
                         </button>

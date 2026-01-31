@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ChevronLeft, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { API_BASE_URL } from '../config';
 
 interface PaymentRecord {
     _id?: string;
@@ -30,8 +31,8 @@ const History: React.FC = () => {
 
             // Fetch from backend with optional unit filter
             const url = unitFilter
-                ? `https://palliative-care.onrender.com/api/payment/history?page=${pageNum}&limit=10&ward=${encodeURIComponent(unitFilter)}`
-                : `https://palliative-care.onrender.com/api/payment/history?page=${pageNum}&limit=10`;
+                ? `${API_BASE_URL}/api/payment/history?page=${pageNum}&limit=10&ward=${encodeURIComponent(unitFilter)}`
+                : `${API_BASE_URL}/api/payment/history?page=${pageNum}&limit=10`;
 
             const res = await fetch(url);
             const data = await res.json();

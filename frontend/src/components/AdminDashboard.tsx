@@ -7,8 +7,9 @@ import {
     LineChart, Line
 } from 'recharts';
 import { io } from 'socket.io-client';
+import { API_BASE_URL } from '../config';
 
-const SOCKET_URL = 'https://palliative-care.onrender.com';
+const SOCKET_URL = API_BASE_URL;
 
 interface Payment {
     _id: string;
@@ -50,7 +51,7 @@ const AdminDashboard: React.FC = () => {
             if (search) params.append('search', search);
             if (wardFilter !== 'All') params.append('ward', wardFilter);
 
-            const res = await fetch(`https://palliative-care.onrender.com/api/admin/payments?${params.toString()}`, {
+            const res = await fetch(`${API_BASE_URL}/api/admin/payments?${params.toString()}`, {
                 headers: { 'Authorization': token }
             });
 
@@ -70,7 +71,7 @@ const AdminDashboard: React.FC = () => {
         const token = localStorage.getItem('adminToken');
         if (!token) return navigate('/login');
         try {
-            const res = await fetch(`https://palliative-care.onrender.com/api/admin/analytics`, {
+            const res = await fetch(`${API_BASE_URL}/api/admin/analytics`, {
                 headers: { 'Authorization': token }
             });
             const data = await res.json();

@@ -18,7 +18,9 @@ import banner6 from '../assets/WhatsApp Image 2026-01-23 at 12.11.04 AM.jpeg';
 import banner7 from '../assets/WhatsApp Image 2026-01-23 at 12.11.05 AM.jpeg';
 import banner8 from '../assets/WhatsApp Image 2026-01-23 at 12.11.06 AM.jpeg';
 
-const SOCKET_URL = 'https://palliative-care.onrender.com';
+import { API_BASE_URL } from '../config';
+
+const SOCKET_URL = API_BASE_URL;
 
 const UNIT_NAMES = [
     'കുണ്ടൂർകുന്ന്', 'കൂത്തുപറമ്പ്', 'കിഴക്കുംപുറം', 'ചോളോട്', 'നറുക്കോട്',
@@ -98,7 +100,7 @@ const Dashboard: React.FC = () => {
 
     const fetchToppers = async () => {
         try {
-            const res = await fetch('https://palliative-care.onrender.com/api/payment/todays-toppers');
+            const res = await fetch(`${API_BASE_URL}/api/payment/todays-toppers`);
             if (!res.ok) throw new Error('Failed to fetch');
 
             const data = await res.json();

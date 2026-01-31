@@ -7,12 +7,8 @@ import { FederalBankUtils } from '../utils/federal_bank.utils';
 
 const router = express.Router();
 
-const FB_CONFIG = {
-    api_url: process.env.FB_API_URL || 'https://pg.federalbank.co.in/api',
-    api_key: process.env.FB_API_KEY,
-    salt: process.env.FB_SALT,
-    return_url: process.env.FB_RETURN_URL || 'https://palliative-care.onrender.com/api/payment/verify',
-};
+// FB_CONFIG removed to allow dynamic access in routes
+
 
 // Helper function to send WhatsApp notification asynchronously
 const sendWhatsAppNotification = async (name: string, quantity: number, amount: number, mobile: string) => {
@@ -39,7 +35,15 @@ const sendWhatsAppNotification = async (name: string, quantity: number, amount: 
 router.post('/create-order', paymentLimiter, async (req, res) => {
     try {
         const { quantity = 1, name, mobile, ward } = req.body;
-        const amount = 500 * quantity;
+        // Check for test amount in env, otherwise use default calculation
+        const amount = process.env.TEST_AMOUNT ? parseFloat(process.env.TEST_AMOUNT) : (500 * quantity);
+
+        const FB_CONFIG = {
+            api_url: process.env.FB_API_URL || 'https://pgbiz.Omniware.in',
+            api_key: process.env.FB_API_KEY,
+            salt: process.env.FB_SALT,
+            return_url: process.env.FB_RETURN_URL || 'https://palliative-care.onrender.com/api/payment/verify',
+        };
 
         // Check if PAYMENT_MODE is disabled in .env
         const isNoPaymentMode = process.env.PAYMENT_MODE === 'false';
@@ -113,7 +117,14 @@ router.post('/create-order', paymentLimiter, async (req, res) => {
             body: new URLSearchParams(params)
         });
 
-        const data = await fbResponse.json();
+        const responseText = await fbResponse.text();
+        let data;
+        try {
+            data = JSON.parse(responseText);
+        } catch (e) {
+            console.error('Failed to parse Federal Bank response as JSON:', responseText);
+            return res.status(500).json({ error: 'Invalid response from payment gateway' });
+        }
 
         if (data.data && data.data.url) {
             // Save initial "Created" state
@@ -156,6 +167,13 @@ router.post('/verify', async (req, res) => {
     try {
         const responseData = req.body;
         const { order_id, transaction_id, response_code, response_message } = responseData;
+
+        const FB_CONFIG = {
+            api_url: process.env.FB_API_URL || 'https://pgbiz.Omniware.in',
+            api_key: process.env.FB_API_KEY,
+            salt: process.env.FB_SALT,
+            return_url: process.env.FB_RETURN_URL || 'https://palliative-care.onrender.com/api/payment/verify',
+        };
 
         const isValidHash = FederalBankUtils.verifyHash(responseData, FB_CONFIG.salt!);
 
@@ -223,6 +241,13 @@ router.post('/webhook', async (req, res) => {
     try {
         const payload = req.body;
         const { order_id, transaction_id, response_code } = payload;
+
+        const FB_CONFIG = {
+            api_url: process.env.FB_API_URL || 'https://pgbiz.Omniware.in',
+            api_key: process.env.FB_API_KEY,
+            salt: process.env.FB_SALT,
+            return_url: process.env.FB_RETURN_URL || 'https://palliative-care.onrender.com/api/payment/verify',
+        };
 
         const isValidHash = FederalBankUtils.verifyHash(payload, FB_CONFIG.salt!);
         if (!isValidHash) {

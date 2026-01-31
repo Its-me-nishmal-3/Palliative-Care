@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { API_BASE_URL } from '../config';
 
 const AdminLogin: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -11,7 +12,7 @@ const AdminLogin: React.FC = () => {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await fetch('https://palliative-care.onrender.com/api/admin/login', {
+            const res = await fetch(`${API_BASE_URL}/api/admin/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
