@@ -63,10 +63,10 @@ const Receipt: React.FC = () => {
                 // Watermark
                 const now = new Date();
                 const watermark = `Generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
-                ctx.font = 'italic 30px Arial, sans-serif';
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                ctx.font = 'italic 60px Arial, sans-serif';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
                 ctx.textAlign = 'center';
-                ctx.fillText(watermark, canvas.width / 2, canvas.height - 50);
+                ctx.fillText(watermark, canvas.width / 2, canvas.height - 100);
 
                 // Trigger download
                 const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
@@ -200,10 +200,10 @@ const Receipt: React.FC = () => {
                                 // Watermark
                                 const now = new Date();
                                 const watermark = `Generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
-                                ctx.font = 'italic 30px Arial, sans-serif';
-                                ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                                ctx.font = 'italic 60px Arial, sans-serif';
+                                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
                                 ctx.textAlign = 'center';
-                                ctx.fillText(watermark, canvas.width / 2, canvas.height - 50);
+                                ctx.fillText(watermark, canvas.width / 2, canvas.height - 100);
 
                                 const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
                                 const blob = await (await fetch(dataUrl)).blob();

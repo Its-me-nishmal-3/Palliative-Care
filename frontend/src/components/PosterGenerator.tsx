@@ -252,14 +252,14 @@ const PosterGenerator: React.FC = () => {
         const watermark = `Generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
 
         ctx.save();
-        const fontSize = Math.round(30 * scale);
+        const fontSize = Math.round(60 * scale);
         ctx.font = `italic ${fontSize}px Arial, sans-serif`;
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
         // Position: Bottom Center, with some padding
-        ctx.fillText(watermark, ctx.canvas.width / 2, ctx.canvas.height - (50 * scale));
+        ctx.fillText(watermark, ctx.canvas.width / 2, ctx.canvas.height - (100 * scale));
         ctx.restore();
     };
 

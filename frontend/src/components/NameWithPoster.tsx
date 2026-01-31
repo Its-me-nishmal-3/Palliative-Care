@@ -71,10 +71,10 @@ const NameWithPoster: React.FC = () => {
                 // Watermark
                 const now = new Date();
                 const watermarkText = `Generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
-                ctx.font = 'italic 30px Arial, sans-serif';
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                ctx.font = 'italic 40px Arial, sans-serif';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
                 ctx.textAlign = 'center';
-                ctx.fillText(watermarkText, canvas.width / 2, canvas.height - 50);
+                ctx.fillText(watermarkText, canvas.width / 2, canvas.height - 80);
 
                 // Convert to blob and replace document
                 canvas.toBlob((blob) => {
@@ -137,10 +137,10 @@ const NameWithPoster: React.FC = () => {
                 // Watermark
                 const now = new Date();
                 const watermarkText = `Generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
-                ctx.font = 'italic 30px Arial, sans-serif';
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                ctx.font = 'italic 40px Arial, sans-serif';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
                 ctx.textAlign = 'center';
-                ctx.fillText(watermarkText, canvas.width / 2, canvas.height - 50);
+                ctx.fillText(watermarkText, canvas.width / 2, canvas.height - 80);
 
                 const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
                 const link = document.createElement('a');
@@ -200,10 +200,10 @@ const NameWithPoster: React.FC = () => {
                 // Watermark
                 const now = new Date();
                 const watermarkText = `Generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
-                ctx.font = 'italic 30px Arial, sans-serif';
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                ctx.font = 'italic 40px Arial, sans-serif';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
                 ctx.textAlign = 'center';
-                ctx.fillText(watermarkText, canvas.width / 2, canvas.height - 50);
+                ctx.fillText(watermarkText, canvas.width / 2, canvas.height - 80);
 
                 const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
                 const blob = await (await fetch(dataUrl)).blob();
