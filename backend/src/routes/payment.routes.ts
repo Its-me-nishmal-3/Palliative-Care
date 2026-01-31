@@ -165,6 +165,10 @@ router.post('/create-order', paymentLimiter, async (req, res) => {
 // Verify Payment / Return URL handling
 router.post('/verify', async (req, res) => {
     try {
+        console.log('--- Verify Endpoint Hit ---');
+        console.log('Request Body:', req.body);
+        console.log('Request Query:', req.query);
+
         const responseData = req.body;
         const { order_id, transaction_id, response_code, response_message } = responseData;
 

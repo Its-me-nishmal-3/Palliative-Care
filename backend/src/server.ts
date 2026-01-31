@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 
 // Apply JSON parser for non-webhook routes
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Apply general rate limiter to all routes
 app.use(generalLimiter);
