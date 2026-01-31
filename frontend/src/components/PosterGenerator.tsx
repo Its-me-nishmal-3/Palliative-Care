@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Download, Upload, ArrowLeft, Loader2, Check, X, Share2 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Cropper from 'react-easy-crop';
 
 interface Point {
@@ -85,8 +85,9 @@ const drawRoundedRect = (
 
 const PosterGenerator: React.FC = () => {
     const navigate = useNavigate();
+    const { state } = useLocation();
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [name, setName] = useState('');
+    const [name] = useState(state?.donorName || '');
     const [userImage, setUserImage] = useState<string | null>(null); // Final cropped image
     const [isGenerating, setIsGenerating] = useState(false);
     const [templateImage, setTemplateImage] = useState<HTMLImageElement | null>(null);
@@ -251,14 +252,14 @@ const PosterGenerator: React.FC = () => {
         const watermark = `Generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
 
         ctx.save();
-        const fontSize = Math.round(20 * scale);
-        ctx.font = `italic ${fontSize}px Arial`;
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        const fontSize = Math.round(30 * scale);
+        ctx.font = `italic ${fontSize}px Arial, sans-serif`;
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
         ctx.textAlign = 'center';
-        ctx.textBaseline = 'bottom';
+        ctx.textBaseline = 'middle';
 
         // Position: Bottom Center, with some padding
-        ctx.fillText(watermark, ctx.canvas.width / 2, ctx.canvas.height - (30 * scale));
+        ctx.fillText(watermark, ctx.canvas.width / 2, ctx.canvas.height - (50 * scale));
         ctx.restore();
     };
 
@@ -410,30 +411,20 @@ const PosterGenerator: React.FC = () => {
             </h1>
 
             {/* Inputs */}
-            <div className="w-full max-w-md bg-white border border-brand-purple/10 rounded-2xl p-4 space-y-4 mb-8 shadow-xl">
-                <div className="flex flex-col sm:flex-row gap-3">
-                    <div className="relative w-full sm:flex-1 bg-brand-lavender/50 rounded-xl overflow-hidden hover:ring-2 ring-brand-purple/50 transition-all cursor-pointer h-14 flex items-center justify-center border border-brand-purple/20">
-                        <input
-                            type="file"
-                            className="absolute inset-0 opacity-0 cursor-pointer z-10"
-                            onChange={handleImageUpload}
-                            accept="image/*"
-                        />
-                        <div className="flex items-center gap-2 pointer-events-none">
-                            <Upload className="w-5 h-5 text-brand-purple" />
-                            <span className="text-xs font-bold text-brand-purple">
-                                {userImage ? 'Change Photo' : 'Upload Photo'}
-                            </span>
-                        </div>
-                    </div>
-
+            <div className="w-full max-w-md bg-white border border-brand-purple/10 rounded-2xl p-4 mb-8 shadow-xl">
+                <div className="relative w-full bg-brand-lavender/50 rounded-xl overflow-hidden hover:ring-2 ring-brand-purple/50 transition-all cursor-pointer h-14 flex items-center justify-center border border-brand-purple/20">
                     <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full sm:flex-[2] bg-white border border-brand-purple/20 rounded-xl px-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-purple/20 h-14"
-                        placeholder="Enter your name"
+                        type="file"
+                        className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                        onChange={handleImageUpload}
+                        accept="image/*"
                     />
+                    <div className="flex items-center gap-2 pointer-events-none">
+                        <Upload className="w-5 h-5 text-brand-purple" />
+                        <span className="text-xs font-bold text-brand-purple">
+                            {userImage ? 'Change Photo' : 'Upload Photo'}
+                        </span>
+                    </div>
                 </div>
             </div>
 

@@ -231,7 +231,7 @@ const Receipt: React.FC = () => {
                     {isDownloading ? <Loader2 size={16} className="animate-spin" /> : <Share2 size={16} />} Share
                 </button>
                 <button
-                    onClick={() => navigate('/gen-poster')}
+                    onClick={() => navigate('/gen-poster', { state: { donorName: payment.name } })}
                     className="flex-1 bg-brand-teal hover:bg-brand-teal/90 text-white font-bold py-2.5 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 text-sm"
                 >
                     Poster

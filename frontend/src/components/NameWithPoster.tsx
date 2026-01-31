@@ -68,6 +68,14 @@ const NameWithPoster: React.FC = () => {
 
                 // Quantity hidden
 
+                // Watermark
+                const now = new Date();
+                const watermarkText = `Generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
+                ctx.font = 'italic 30px Arial, sans-serif';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                ctx.textAlign = 'center';
+                ctx.fillText(watermarkText, canvas.width / 2, canvas.height - 50);
+
                 // Convert to blob and replace document
                 canvas.toBlob((blob) => {
                     if (blob) {
@@ -126,6 +134,14 @@ const NameWithPoster: React.FC = () => {
 
                 // Quantity hidden
 
+                // Watermark
+                const now = new Date();
+                const watermarkText = `Generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
+                ctx.font = 'italic 30px Arial, sans-serif';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                ctx.textAlign = 'center';
+                ctx.fillText(watermarkText, canvas.width / 2, canvas.height - 50);
+
                 const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
                 const link = document.createElement('a');
                 link.download = `poster-${name.replace(/\s+/g, '-').toLowerCase()}.jpg`;
@@ -180,6 +196,14 @@ const NameWithPoster: React.FC = () => {
                 ctx.fillText(`₹${amount}`, amtX, amtY);
 
                 // Quantity hidden
+
+                // Watermark
+                const now = new Date();
+                const watermarkText = `Generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
+                ctx.font = 'italic 30px Arial, sans-serif';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                ctx.textAlign = 'center';
+                ctx.fillText(watermarkText, canvas.width / 2, canvas.height - 50);
 
                 const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
                 const blob = await (await fetch(dataUrl)).blob();
