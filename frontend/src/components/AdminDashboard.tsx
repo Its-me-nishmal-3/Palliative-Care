@@ -8,6 +8,7 @@ import {
 } from 'recharts';
 import { io } from 'socket.io-client';
 import { API_BASE_URL } from '../config';
+import { normalizeWardName } from '../utils/normalization';
 
 const SOCKET_URL = API_BASE_URL;
 
@@ -60,8 +61,13 @@ const AdminDashboard: React.FC = () => {
                 return navigate('/login');
             }
 
-            const data = await res.json();
-            setPayments(data);
+            const data: Payment[] = await res.json();
+            // Normalize ward names in payment list
+            const normalizedPayments = data.map(payment => ({
+                ...payment,
+                ward: normalizeWardName(payment.ward)
+            }));
+            setPayments(normalizedPayments);
         } catch (error) {
             console.error('Error fetching payments:', error);
         }
@@ -74,8 +80,29 @@ const AdminDashboard: React.FC = () => {
             const res = await fetch(`${API_BASE_URL}/api/admin/analytics`, {
                 headers: { 'Authorization': token }
             });
-            const data = await res.json();
-            setAnalytics(data);
+            const data: Analytics = await res.json();
+
+            // Normalize wardStats to consolidate "നാട്ടുക്കൽ" and "നാട്ടുകൽ"
+            const normalizedWardStats: Record<string, { amount: number; quantity: number; count: number }> = {};
+            if (data.wardStats) {
+                data.wardStats.forEach(stat => {
+                    const normalized = normalizeWardName(stat._id);
+                    if (!normalizedWardStats[normalized]) {
+                        normalizedWardStats[normalized] = { amount: 0, quantity: 0, count: 0 };
+                    }
+                    normalizedWardStats[normalized].amount += stat.amount;
+                    normalizedWardStats[normalized].quantity += stat.quantity;
+                    normalizedWardStats[normalized].count += stat.count;
+                });
+            }
+
+            setAnalytics({
+                ...data,
+                wardStats: Object.entries(normalizedWardStats).map(([id, stats]) => ({
+                    _id: id,
+                    ...stats
+                }))
+            });
         } catch (error) {
             console.error('Error fetching analytics:', error);
         }

@@ -19,6 +19,7 @@ import banner7 from '../assets/WhatsApp Image 2026-01-23 at 12.11.05 AM.jpeg';
 import banner8 from '../assets/WhatsApp Image 2026-01-23 at 12.11.06 AM.jpeg';
 
 import { API_BASE_URL } from '../config';
+import { normalizeWardName } from '../utils/normalization';
 
 const SOCKET_URL = API_BASE_URL;
 
@@ -92,7 +93,20 @@ const Dashboard: React.FC = () => {
         try {
             const res = await fetch(`${SOCKET_URL}/api/payment/stats`);
             const data = await res.json();
-            setStats(data);
+
+            // Normalize stats to consolidate "നാട്ടുക്കൽ" and "നാട്ടുകൽ"
+            const normalizedWardWise: Record<string, number> = {};
+            if (data.wardWise) {
+                Object.entries(data.wardWise).forEach(([ward, count]) => {
+                    const normalized = normalizeWardName(ward);
+                    normalizedWardWise[normalized] = (normalizedWardWise[normalized] || 0) + (count as number);
+                });
+            }
+
+            setStats({
+                ...data,
+                wardWise: normalizedWardWise
+            });
         } catch (error) {
             console.error('Error fetching stats:', error);
         }
@@ -106,7 +120,12 @@ const Dashboard: React.FC = () => {
             const data = await res.json();
 
             if (Array.isArray(data) && data.length > 0) {
-                setTodaysToppers(data);
+                // Normalize ward names in toppers
+                const normalizedToppers = data.map((topper: any) => ({
+                    ...topper,
+                    ward: normalizeWardName(topper.ward)
+                }));
+                setTodaysToppers(normalizedToppers);
             } else {
                 // Dummy data for testing/fallback
                 // setTodaysToppers([
