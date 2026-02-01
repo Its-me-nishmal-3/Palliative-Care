@@ -1,9 +1,9 @@
 export const normalizeWardName = (name: string): string => {
     if (!name) return name;
-    // Normalize "നാട്ടുക്കൽ" to "നാട്ടുകൽ"
+    // Normalize variants of "നാട്ടുകൽ"
     if (name === 'നാട്ടുക്കൽ') return 'നാട്ടുകൽ';
-    // Normalize "കാമ്പ്രം" to "തേക്കുംമുറി"
-    if (name === 'കാമ്പ്രം') return 'തേക്കുംമുറി';
+    // Normalize variants of "തെക്കുംമുറി" (including old name "കാമ്പ്രം")
+    if (name === 'കാമ്പ്രം' || name === 'തേക്കുംമുറി') return 'തെക്കുംമുറി';
     return name;
 };
 
@@ -16,8 +16,9 @@ export const transliterateWard = (name: string): string => {
         'നറുക്കോട്': 'Narukkode',
         'കൂരിമുക്ക്': 'Koorimukku',
         'മുറിയങ്കണ്ണി': 'Muriyankanni',
-        'തേക്കുംമുറി': 'Thekkummuri',
-        'കാമ്പ്രം': 'Thekkummuri', // Handle legacy data in PDF/Excel
+        'തെക്കുംമുറി': 'Thekkummuri',
+        'തേക്കുംമുറി': 'Thekkummuri', // Handle legacy/typo in results
+        'കാമ്പ്രം': 'Thekkummuri', // Handle legacy data
         'പൂവ്വത്താണി': 'Poovathani',
         'വെള്ളക്കുന്ന്': 'Vellakkunnu',
         'കരിങ്കല്ലത്താണി': 'Karinkallathani',
