@@ -1,14 +1,17 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, LogOut, TrendingUp, Users, Package, DollarSign } from 'lucide-react';
+import { Search, LogOut, TrendingUp, Users, Package, DollarSign, Clock, Filter, ArrowUpDown, Download } from 'lucide-react';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer,
     LineChart, Line
 } from 'recharts';
 import { io } from 'socket.io-client';
 import { API_BASE_URL } from '../config';
-import { normalizeWardName } from '../utils/normalization';
+import { normalizeWardName, transliterateWard } from '../utils/normalization';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import * as XLSX from 'xlsx';
 
 const SOCKET_URL = API_BASE_URL;
 
@@ -41,6 +44,8 @@ const AdminDashboard: React.FC = () => {
     const [analytics, setAnalytics] = useState<Analytics | null>(null);
     const [search, setSearch] = useState('');
     const [wardFilter, setWardFilter] = useState('All');
+    const [statusFilter, setStatusFilter] = useState('All');
+    const [sortBy, setSortBy] = useState('newest');
     const navigate = useNavigate();
 
     const fetchPayments = async () => {
@@ -145,6 +150,89 @@ const AdminDashboard: React.FC = () => {
         localStorage.removeItem('adminToken');
         navigate('/login');
     };
+
+    const getFilteredAndSortedPayments = () => {
+        let filtered = [...payments];
+
+        // 1. Status Filter
+        if (statusFilter !== 'All') {
+            filtered = filtered.filter(p => p.status?.toLowerCase() === statusFilter.toLowerCase());
+        }
+
+        // 2. Sorting
+        filtered.sort((a, b) => {
+            switch (sortBy) {
+                case 'oldest':
+                    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+                case 'amount-high':
+                    return b.amount - a.amount;
+                case 'amount-low':
+                    return a.amount - b.amount;
+                case 'name-asc':
+                    return a.name.localeCompare(b.name);
+                case 'newest':
+                default:
+                    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+            }
+        });
+
+        return filtered;
+    };
+
+    const exportToExcel = () => {
+        const filtered = getFilteredAndSortedPayments();
+        const data = filtered.map(p => {
+            const date = new Date(p.createdAt);
+            return {
+                'Date': date.toLocaleDateString(),
+                'Time': date.toLocaleTimeString(),
+                'Name': p.name,
+                'Mobile': p.mobile,
+                'Unit': transliterateWard(p.ward),
+                'Qty': p.quantity,
+                'Amount': p.amount,
+                'Status': p.status || 'success',
+                'Payment ID': p.paymentId
+            };
+        });
+
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Payments");
+        XLSX.writeFile(workbook, `payments_export_${new Date().toISOString().split('T')[0]}.xlsx`);
+    };
+
+    const exportToPDF = () => {
+        const filtered = getFilteredAndSortedPayments();
+        const doc = new jsPDF() as any;
+
+        doc.text("Payment History Report", 14, 15);
+        doc.setFontSize(10);
+        doc.text(`Generated on: ${new Date().toLocaleString()}`, 14, 22);
+
+        const tableColumn = ["Date", "Name", "Mobile", "Unit", "Qty", "Amt", "Status"];
+        const tableRows = filtered.map(p => [
+            new Date(p.createdAt).toLocaleDateString(),
+            p.name,
+            p.mobile,
+            transliterateWard(p.ward),
+            p.quantity,
+            p.amount,
+            p.status || 'success'
+        ]);
+
+        autoTable(doc, {
+            head: [tableColumn],
+            body: tableRows,
+            startY: 25,
+            theme: 'grid',
+            headStyles: { fillColor: [48, 82, 161] }
+        });
+
+        doc.save(`payments_report_${new Date().toISOString().split('T')[0]}.pdf`);
+    };
+
+    const displayPayments = getFilteredAndSortedPayments();
 
     return (
         <div className="p-6 max-w-7xl mx-auto min-h-screen pb-24 space-y-8 bg-white text-gray-900">
@@ -264,34 +352,81 @@ const AdminDashboard: React.FC = () => {
             {activeTab === 'payments' && (
                 <div className="animate-in fade-in zoom-in duration-300">
                     {/* Filters */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                         <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                             <input
                                 type="text"
-                                placeholder="Search Name, Mobile, or Payment ID"
+                                placeholder="Search Name, Phone..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full pl-10 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-purple/20 bg-white text-gray-900"
+                                className="w-full pl-10 px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-purple/20 bg-white text-gray-900 text-sm"
                             />
                         </div>
 
-                        <select
-                            value={wardFilter}
-                            onChange={(e) => setWardFilter(e.target.value)}
-                            className="w-full pl-4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-purple/20 bg-white text-gray-900"
+                        <div className="flex items-center gap-2">
+                            <Filter className="text-gray-400 shrink-0" size={18} />
+                            <select
+                                value={wardFilter}
+                                onChange={(e) => setWardFilter(e.target.value)}
+                                className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-purple/20 bg-white text-gray-900 text-sm"
+                            >
+                                <option value="All">All Units</option>
+                                {[
+                                    'കുണ്ടൂർകുന്ന്', 'കൂത്തുപറമ്പ്', 'കിഴക്കുംപുറം', 'ചോളോട്', 'നറുക്കോട്',
+                                    'കൂരിമുക്ക്', 'മുറിയങ്കണ്ണി', 'കാമ്പ്രം', 'പൂവ്വത്താണി', 'വെള്ളക്കുന്ന്',
+                                    'കരിങ്കല്ലത്താണി', 'തൊടൂകാപ്പ്', 'തള്ളച്ചിറ', 'മണലുംപുറം', '53 ാം മൈൽ',
+                                    'പാറപ്പുറം', 'നാട്ടുകൽ', 'അണ്ണാൻതൊടി', 'പുതുമനക്കുളമ്പ്', 'പഴഞ്ചീരി',
+                                    'പാലോട്', 'പാറമ്മൽ', 'കുന്നുംപുറം', 'കൊടക്കാട്', 'Other'
+                                ].map((ward, i) => (
+                                    <option key={i} value={ward}>{ward}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                            <Clock className="text-gray-400 shrink-0" size={18} />
+                            <select
+                                value={statusFilter}
+                                onChange={(e) => setStatusFilter(e.target.value)}
+                                className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-purple/20 bg-white text-gray-900 text-sm"
+                            >
+                                <option value="All">All Status</option>
+                                <option value="success">Success</option>
+                                <option value="failed">Failed</option>
+                                <option value="created">Created</option>
+                            </select>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                            <ArrowUpDown className="text-gray-400 shrink-0" size={18} />
+                            <select
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value)}
+                                className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-purple/20 bg-white text-gray-900 text-sm"
+                            >
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="amount-high">Amount: High to Low</option>
+                                <option value="amount-low">Amount: Low to High</option>
+                                <option value="name-asc">Name: A to Z</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-end gap-3 mb-4">
+                        <button
+                            onClick={exportToExcel}
+                            className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium transition-colors shadow-sm"
                         >
-                            <option value="All" className="bg-white text-gray-900">All Units</option>
-                            {[
-                                'കുണ്ടൂർകുന്ന്', 'കൂത്തുപറമ്പ്', 'കിഴക്കുംപുറം', 'ചോളോട്', 'നറുക്കോട്',
-                                'കൂരിമുക്ക്', 'മുറിയങ്കണ്ണി', 'കാമ്പ്രം', 'പൂവ്വത്താണി', 'വെള്ളക്കുന്ന്',
-                                'കരിങ്കല്ലത്താണി', 'തൊടൂകാപ്പ്', 'തള്ളച്ചിറ', 'മണലുംപുറം', '53 ാം മൈൽ',
-                                'പാറപ്പുറം', 'നാട്ടുകൽ', 'അണ്ണാൻതൊടി', 'പുതുമനക്കുളമ്പ്', 'പഴഞ്ചീരി',
-                                'പാലോട്', 'പാറമ്മൽ', 'കുന്നുംപുറം', 'കൊടക്കാട്', 'Other'
-                            ].map((ward, i) => (
-                                <option key={i} value={ward} className="bg-white text-gray-900">{ward}</option>
-                            ))}
-                        </select>
+                            <Download size={16} /> Export Excel
+                        </button>
+                        <button
+                            onClick={exportToPDF}
+                            className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors shadow-sm"
+                        >
+                            <Download size={16} /> Export PDF
+                        </button>
                     </div>
 
                     {/* Table */}
@@ -311,32 +446,40 @@ const AdminDashboard: React.FC = () => {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">
-                                    {payments.length === 0 ? (
+                                    {displayPayments.length === 0 ? (
                                         <tr>
-                                            <td colSpan={7} className="p-8 text-center text-gray-500">No payments found</td>
+                                            <td colSpan={8} className="p-8 text-center text-gray-500">No payments found</td>
                                         </tr>
                                     ) : (
-                                        payments.map((p) => (
-                                            <tr key={p._id} className="hover:bg-gray-50 transition-colors">
-                                                <td className="p-4 text-sm text-gray-600">{new Date(p.createdAt).toLocaleDateString()}</td>
-                                                <td className="p-4 font-semibold">{p.name}</td>
-                                                <td className="p-4 text-gray-600 font-mono">{p.mobile}</td>
-                                                <td className="p-4 text-gray-600">{p.ward}</td>
-                                                <td className="p-4 text-gray-600">{p.quantity}</td>
-                                                <td className="p-4 text-brand-blue font-bold">₹{p.amount}</td>
-                                                <td className="p-4">
-                                                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${p.status === 'success'
-                                                        ? 'bg-brand-purple/10 text-brand-purple'
-                                                        : p.status === 'failed'
-                                                            ? 'bg-red-500/10 text-red-400'
-                                                            : 'bg-amber-500/10 text-amber-400'
-                                                        }`}>
-                                                        {p.status ? (p.status.charAt(0).toUpperCase() + p.status.slice(1)) : 'Success'}
-                                                    </span>
-                                                </td>
-                                                <td className="p-4 text-xs text-gray-500 font-mono hidden md:table-cell">{p.paymentId}</td>
-                                            </tr>
-                                        ))
+                                        displayPayments.map((p) => {
+                                            const createdAt = new Date(p.createdAt);
+                                            return (
+                                                <tr key={p._id} className="hover:bg-gray-50 transition-colors">
+                                                    <td className="p-4">
+                                                        <div className="text-sm font-medium text-gray-900">{createdAt.toLocaleDateString()}</div>
+                                                        <div className="text-xs text-gray-500">{createdAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                                                    </td>
+                                                    <td className="p-4 font-semibold text-gray-900">{p.name}</td>
+                                                    <td className="p-4 text-gray-600 font-mono text-sm">{p.mobile}</td>
+                                                    <td className="p-4 text-gray-600 text-sm">{p.ward}</td>
+                                                    <td className="p-4 text-gray-600 text-sm">{p.quantity}</td>
+                                                    <td className="p-4 text-brand-blue font-bold">₹{p.amount}</td>
+                                                    <td className="p-4">
+                                                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${p.status === 'success'
+                                                            ? 'bg-emerald-100 text-emerald-700'
+                                                            : p.status === 'failed'
+                                                                ? 'bg-red-100 text-red-700'
+                                                                : p.status === 'created'
+                                                                    ? 'bg-blue-100 text-blue-700'
+                                                                    : 'bg-amber-100 text-amber-700'
+                                                            }`}>
+                                                            {p.status || 'Success'}
+                                                        </span>
+                                                    </td>
+                                                    <td className="p-4 text-xs text-gray-400 font-mono hidden md:table-cell">{p.paymentId || 'N/A'}</td>
+                                                </tr>
+                                            );
+                                        })
                                     )}
                                 </tbody>
                             </table>

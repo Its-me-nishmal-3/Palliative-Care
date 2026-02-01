@@ -134,7 +134,7 @@ router.post('/create-order', paymentLimiter, async (req, res) => {
                 amount,
                 quantity,
                 mobile,
-                paymentId: 'pending',
+                paymentId: 'created',
                 orderId: orderId,
                 status: 'created'
             });
