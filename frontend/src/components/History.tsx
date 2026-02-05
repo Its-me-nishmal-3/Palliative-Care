@@ -25,7 +25,7 @@ const History: React.FC = () => {
 
     const [history, setHistory] = useState<PaymentRecord[]>([]);
     const [loading, setLoading] = useState(true);
-    const [page, setPage] = useState(1);
+    const [, setPage] = useState<number>(1); // Current page (unused state variable)
     const [hasMore, setHasMore] = useState(true);
     const [isFetchingMore, setIsFetchingMore] = useState(false);
 
