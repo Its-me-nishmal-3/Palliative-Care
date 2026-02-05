@@ -29,11 +29,6 @@ const History: React.FC = () => {
     const [hasMore, setHasMore] = useState(true);
     const [isFetchingMore, setIsFetchingMore] = useState(false);
 
-    // 🔥 CRITICAL FIX — scroll to TOP before first paint
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
     const fetchHistory = async (pageNum: number, isLoadMore = false) => {
         try {
             if (isLoadMore) setIsFetchingMore(true);
@@ -59,9 +54,15 @@ const History: React.FC = () => {
         }
     };
 
-    // 🔹 Reset + stay at TOP when unit filter changes
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'instant' });
+    // 🔹 Reset + stay at TOP when unit filter changes or on mount
+    useLayoutEffect(() => {
+        // Immediate scroll
+        window.scrollTo(0, 0);
+
+        // Timeout to override browser scroll restoration
+        const timer = setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 10);
 
         setHistory([]);
         setPage(1);
@@ -69,6 +70,8 @@ const History: React.FC = () => {
         setLoading(true);
 
         fetchHistory(1);
+
+        return () => clearTimeout(timer);
     }, [unitFilter]);
 
     const handleScroll = () => {
