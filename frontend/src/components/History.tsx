@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+    useEffect,
+    useLayoutEffect,
+    useState
+} from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ChevronLeft, X } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -25,6 +29,11 @@ const History: React.FC = () => {
     const [hasMore, setHasMore] = useState(true);
     const [isFetchingMore, setIsFetchingMore] = useState(false);
 
+    // 🔥 CRITICAL FIX — scroll to TOP before first paint
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const fetchHistory = async (pageNum: number, isLoadMore = false) => {
         try {
             if (isLoadMore) setIsFetchingMore(true);
@@ -50,9 +59,9 @@ const History: React.FC = () => {
         }
     };
 
-    // 🔹 Reset + scroll to TOP when unit filter changes
+    // 🔹 Reset + stay at TOP when unit filter changes
     useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        window.scrollTo(0, 0);
 
         setHistory([]);
         setPage(1);
@@ -86,6 +95,7 @@ const History: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-white text-gray-900 p-6 max-w-3xl mx-auto pb-24">
+            {/* HEADER */}
             <header className="flex items-center gap-4 mb-6 bg-white border border-brand-purple/10 p-4 rounded-2xl shadow-lg">
                 <button
                     onClick={() => navigate('/')}
@@ -121,14 +131,15 @@ const History: React.FC = () => {
                 </div>
             </header>
 
+            {/* CONTENT */}
             {loading ? (
-                <div className="text-center text-gray-500 mt-20 bg-white border border-brand-purple/10 p-8 rounded-2xl">
+                <div className="text-center text-gray-500 bg-white border border-brand-purple/10 p-6 rounded-2xl">
                     Loading...
                 </div>
             ) : (
                 <div className="space-y-4">
                     {history.length === 0 ? (
-                        <div className="text-center text-gray-500 mt-20 bg-white border border-brand-purple/10 p-8 rounded-2xl">
+                        <div className="text-center text-gray-500 bg-white border border-brand-purple/10 p-6 rounded-2xl">
                             No payments found
                         </div>
                     ) : (
