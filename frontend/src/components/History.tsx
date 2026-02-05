@@ -29,7 +29,6 @@ const History: React.FC = () => {
         try {
             if (isLoadMore) setIsFetchingMore(true);
 
-            // Fetch from backend with optional unit filter
             const url = unitFilter
                 ? `${API_BASE_URL}/api/payment/history?page=${pageNum}&limit=10&ward=${encodeURIComponent(unitFilter)}`
                 : `${API_BASE_URL}/api/payment/history?page=${pageNum}&limit=10`;
@@ -38,7 +37,9 @@ const History: React.FC = () => {
             const data = await res.json();
 
             if (data.payments) {
-                setHistory(prev => isLoadMore ? [...prev, ...data.payments] : data.payments);
+                setHistory(prev =>
+                    isLoadMore ? [...prev, ...data.payments] : data.payments
+                );
                 setHasMore(data.hasMore);
             }
         } catch (error) {
@@ -49,34 +50,34 @@ const History: React.FC = () => {
         }
     };
 
+    // 🔹 Reset + scroll to TOP when unit filter changes
     useEffect(() => {
-        // Reset when filter changes
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+
         setHistory([]);
         setPage(1);
         setHasMore(true);
+        setLoading(true);
+
         fetchHistory(1);
     }, [unitFilter]);
 
     const handleScroll = () => {
         if (
-            window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight - 100 ||
+            window.innerHeight + document.documentElement.scrollTop <
+            document.documentElement.offsetHeight - 100 ||
             isFetchingMore ||
             !hasMore
         ) {
             return;
         }
+
         setPage(prev => {
             const nextPage = prev + 1;
             fetchHistory(nextPage, true);
             return nextPage;
         });
     };
-
-    useEffect(() => {
-        // Use page to avoid lint warning about unused variable if necessary, or just ignore. 
-        // Actually, let's just log it for debugging or similar to use it.
-        // console.log('Current page:', page); 
-    }, [page]);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -92,13 +93,21 @@ const History: React.FC = () => {
                 >
                     <ChevronLeft />
                 </button>
+
                 <div className="flex-1">
-                    <h1 className="text-2xl font-bold text-gray-800">Payment History</h1>
+                    <h1 className="text-2xl font-bold text-gray-800">
+                        Payment History
+                    </h1>
+
                     {unitFilter && (
                         <div className="flex items-center gap-2 mt-2">
-                            <span className="text-sm text-gray-600">Showing payments for:</span>
+                            <span className="text-sm text-gray-600">
+                                Showing payments for:
+                            </span>
                             <div className="flex items-center gap-2 bg-brand-lavender border border-brand-purple/30 px-3 py-1 rounded-full">
-                                <span className="text-sm font-semibold text-brand-purple">{unitFilter}</span>
+                                <span className="text-sm font-semibold text-brand-purple">
+                                    {unitFilter}
+                                </span>
                                 <button
                                     onClick={() => setSearchParams({})}
                                     className="hover:bg-brand-purple/10 rounded-full p-0.5 transition-colors text-brand-purple"
@@ -113,11 +122,15 @@ const History: React.FC = () => {
             </header>
 
             {loading ? (
-                <div className="text-center text-gray-500 mt-20 bg-white border border-brand-purple/10 p-8 rounded-2xl">Loading...</div>
+                <div className="text-center text-gray-500 mt-20 bg-white border border-brand-purple/10 p-8 rounded-2xl">
+                    Loading...
+                </div>
             ) : (
                 <div className="space-y-4">
                     {history.length === 0 ? (
-                        <div className="text-center text-gray-500 mt-20 bg-white border border-brand-purple/10 p-8 rounded-2xl">No payments found</div>
+                        <div className="text-center text-gray-500 mt-20 bg-white border border-brand-purple/10 p-8 rounded-2xl">
+                            No payments found
+                        </div>
                     ) : (
                         <>
                             {history.map((item, i) => (
@@ -125,19 +138,35 @@ const History: React.FC = () => {
                                     key={item._id || i}
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.05 }}
+                                    transition={{ duration: 0.25 }}
                                     className="bg-white border border-brand-purple/10 p-4 rounded-2xl flex justify-between items-center shadow-lg hover:shadow-xl transition-all"
                                 >
                                     <div>
-                                        <h3 className="font-bold text-gray-800">{item.name}</h3>
-                                        <p className="text-sm text-gray-600">{item.ward} • {new Date(item.createdAt).toLocaleDateString()}</p>
-                                        <p className="text-xs text-gray-500 font-mono mt-1">{item.paymentId}</p>
+                                        <h3 className="font-bold text-gray-800">
+                                            {item.name}
+                                        </h3>
+                                        <p className="text-sm text-gray-600">
+                                            {item.ward} •{' '}
+                                            {new Date(
+                                                item.createdAt
+                                            ).toLocaleDateString()}
+                                        </p>
+                                        <p className="text-xs text-gray-500 font-mono mt-1">
+                                            {item.paymentId}
+                                        </p>
                                     </div>
+
                                     <div className="text-right">
-                                        <p className="text-brand-blue font-bold text-lg">₹{item.amount}</p>
+                                        <p className="text-brand-blue font-bold text-lg">
+                                            ₹{item.amount}
+                                        </p>
                                         <button
-                                            onClick={() => navigate('/receipt', { state: { payment: item } })}
-                                            className="text-xs text-brand-teal hover:text-brand-purple mt-1 flex items-center justify-end gap-1 font-medium"
+                                            onClick={() =>
+                                                navigate('/receipt', {
+                                                    state: { payment: item },
+                                                })
+                                            }
+                                            className="text-xs text-brand-teal hover:text-brand-purple mt-1 font-medium"
                                         >
                                             View Receipt
                                         </button>
@@ -146,11 +175,15 @@ const History: React.FC = () => {
                             ))}
 
                             {isFetchingMore && (
-                                <div className="text-center text-gray-500 py-4 bg-white/60 rounded-xl">Loading more...</div>
+                                <div className="text-center text-gray-500 py-4 bg-white/60 rounded-xl">
+                                    Loading more...
+                                </div>
                             )}
 
                             {!hasMore && history.length > 0 && (
-                                <div className="text-center text-gray-500 py-4 text-sm bg-white/60 rounded-xl">No more payments to load</div>
+                                <div className="text-center text-gray-500 py-4 text-sm bg-white/60 rounded-xl">
+                                    No more payments to load
+                                </div>
                             )}
                         </>
                     )}
