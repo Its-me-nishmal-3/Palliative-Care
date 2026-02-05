@@ -61,7 +61,7 @@ const History: React.FC = () => {
 
     // 🔹 Reset + stay at TOP when unit filter changes
     useEffect(() => {
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'instant' });
 
         setHistory([]);
         setPage(1);
@@ -96,40 +96,69 @@ const History: React.FC = () => {
     return (
         <div className="min-h-screen bg-white text-gray-900 p-6 max-w-3xl mx-auto pb-24">
             {/* HEADER */}
-            <header className="flex items-center gap-4 mb-6 bg-white border border-brand-purple/10 p-4 rounded-2xl shadow-lg">
-                <button
-                    onClick={() => navigate('/')}
-                    className="p-2 rounded-full hover:bg-brand-lavender transition-colors text-brand-purple"
-                >
-                    <ChevronLeft />
-                </button>
+            {/* HEADER */}
+            <div className="relative mb-8 pt-4">
+                {unitFilter ? (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-xl overflow-hidden relative"
+                    >
+                        {/* Decorative background blobs */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-purple/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
+                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl -ml-16 -mb-16 pointer-events-none" />
 
-                <div className="flex-1">
-                    <h1 className="text-2xl font-bold text-gray-800">
-                        Payment History
-                    </h1>
+                        <div className="relative z-10">
+                            <button
+                                onClick={() => navigate('/')}
+                                className="mb-6 flex items-center gap-2 text-brand-blue hover:text-brand-purple transition-colors font-medium text-sm group"
+                            >
+                                <div className="bg-brand-blue/10 p-2 rounded-full group-hover:bg-brand-purple/10 transition-colors">
+                                    <ChevronLeft size={16} />
+                                </div>
+                                Back to Dashboard
+                            </button>
 
-                    {unitFilter && (
-                        <div className="flex items-center gap-2 mt-2">
-                            <span className="text-sm text-gray-600">
-                                Showing payments for:
-                            </span>
-                            <div className="flex items-center gap-2 bg-brand-lavender border border-brand-purple/30 px-3 py-1 rounded-full">
-                                <span className="text-sm font-semibold text-brand-purple">
-                                    {unitFilter}
-                                </span>
+                            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                                <div>
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="w-1.5 h-6 brand-gradient rounded-full" />
+                                        <h2 className="text-brand-purple text-xs md:text-sm font-bold uppercase tracking-wider">Unit Dashboard</h2>
+                                    </div>
+                                    <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2 leading-tight">
+                                        {unitFilter}
+                                    </h1>
+                                    <p className="text-gray-500 text-sm md:text-base">
+                                        Showing all payment records for this unit
+                                    </p>
+                                </div>
+
                                 <button
                                     onClick={() => setSearchParams({})}
-                                    className="hover:bg-brand-purple/10 rounded-full p-0.5 transition-colors text-brand-purple"
-                                    title="Clear filter"
+                                    className="self-start md:self-end px-5 py-2.5 bg-white hover:bg-gray-50 text-gray-600 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 border border-gray-200 shadow-sm hover:shadow-md"
                                 >
-                                    <X size={14} />
+                                    <X size={16} />
+                                    View All Units
                                 </button>
                             </div>
                         </div>
-                    )}
-                </div>
-            </header>
+                    </motion.div>
+                ) : (
+                    <header className="flex items-center gap-4 bg-white border border-brand-purple/10 p-4 rounded-2xl shadow-lg">
+                        <button
+                            onClick={() => navigate('/')}
+                            className="p-2 rounded-full hover:bg-brand-lavender transition-colors text-brand-purple"
+                        >
+                            <ChevronLeft />
+                        </button>
+                        <div className="flex-1">
+                            <h1 className="text-2xl font-bold text-gray-800">
+                                Payment History
+                            </h1>
+                        </div>
+                    </header>
+                )}
+            </div>
 
             {/* CONTENT */}
             {loading ? (
