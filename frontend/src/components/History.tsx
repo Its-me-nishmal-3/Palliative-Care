@@ -75,12 +75,10 @@ const History: React.FC = () => {
     }, [unitFilter]);
 
     const handleScroll = () => {
-        if (
-            window.innerHeight + document.documentElement.scrollTop <
-            document.documentElement.offsetHeight - 100 ||
-            isFetchingMore ||
-            !hasMore
-        ) {
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+        const scrollPercentage = (scrollTop + clientHeight) / scrollHeight;
+
+        if (scrollPercentage < 0.8 || isFetchingMore || !hasMore) {
             return;
         }
 
