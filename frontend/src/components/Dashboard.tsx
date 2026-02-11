@@ -253,7 +253,7 @@ const Dashboard: React.FC = () => {
                 </div>
 
                 {/* Today's Toppers Section */}
-                {todaysToppers.length > 0 && (
+                {/* {todaysToppers.length > 0 && (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -295,7 +295,7 @@ const Dashboard: React.FC = () => {
                             </div>
                         </div>
                     </motion.div>
-                )}
+                )} */}
 
                 {/* Content Grid */}
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 md:gap-8">

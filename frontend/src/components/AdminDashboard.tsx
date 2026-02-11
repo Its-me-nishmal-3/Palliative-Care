@@ -12,6 +12,7 @@ import { normalizeWardName, transliterateWard } from '../utils/normalization';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
+import LeaderboardGenerator from './LeaderboardGenerator';
 
 const SOCKET_URL = API_BASE_URL;
 
@@ -39,7 +40,7 @@ interface Analytics {
 }
 
 const AdminDashboard: React.FC = () => {
-    const [activeTab, setActiveTab] = useState<'analytics' | 'payments'>('analytics');
+    const [activeTab, setActiveTab] = useState<'analytics' | 'payments' | 'leaderboard'>('analytics');
     const [payments, setPayments] = useState<Payment[]>([]);
     const [analytics, setAnalytics] = useState<Analytics | null>(null);
     const [search, setSearch] = useState('');
@@ -235,7 +236,7 @@ const AdminDashboard: React.FC = () => {
     const displayPayments = getFilteredAndSortedPayments();
 
     return (
-        <div className="p-6 max-w-7xl mx-auto min-h-screen pb-24 space-y-8 bg-white text-gray-900">
+        <div className="relative z-10 p-6 max-w-7xl mx-auto min-h-screen pb-24 space-y-8 bg-white text-gray-900">
             <header className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div>
                     <h1 className="text-2xl font-bold text-brand-blue">
@@ -256,6 +257,12 @@ const AdminDashboard: React.FC = () => {
                             className={`px-4 py-2 rounded-md text-sm transition-colors ${activeTab === 'payments' ? 'brand-gradient text-white' : 'text-gray-600 hover:text-gray-900'}`}
                         >
                             Payments
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('leaderboard')}
+                            className={`px-4 py-2 rounded-md text-sm transition-colors ${activeTab === 'leaderboard' ? 'brand-gradient text-white' : 'text-gray-600 hover:text-gray-900'}`}
+                        >
+                            Leaderboard
                         </button>
                     </div>
                     <button
@@ -485,6 +492,12 @@ const AdminDashboard: React.FC = () => {
                             </table>
                         </div>
                     </div>
+                </div>
+            )}
+
+            {activeTab === 'leaderboard' && (
+                <div className="animate-in fade-in zoom-in duration-300">
+                    <LeaderboardGenerator />
                 </div>
             )}
         </div>
