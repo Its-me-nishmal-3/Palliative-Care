@@ -4,7 +4,7 @@ import PaymentModal from './PaymentModal';
 
 import { motion, AnimatePresence, useSpring, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { IndianRupee, Trophy, Crown, ChevronRight } from 'lucide-react';
+import { IndianRupee, ChevronRight } from 'lucide-react';
 
 // Assets
 import logo from '../assets/logo.jpeg';
@@ -75,7 +75,6 @@ const Dashboard: React.FC = () => {
     const navigate = useNavigate();
 
     const [stats, setStats] = useState<Stats>({ totalAmount: 0, totalCount: 0, wardWise: {} });
-    const [todaysToppers, setTodaysToppers] = useState<{ _id: string; name: string; ward: string; totalQuantity: number; totalAmount: number }[]>([]);
     const [showModal, setShowModal] = useState(false);
     const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
     const [isWelcomeExpanded, setIsWelcomeExpanded] = useState(() => {
@@ -112,52 +111,17 @@ const Dashboard: React.FC = () => {
         }
     };
 
-    const fetchToppers = async () => {
-        try {
-            const res = await fetch(`${API_BASE_URL}/api/payment/todays-toppers`);
-            if (!res.ok) throw new Error('Failed to fetch');
-
-            const data = await res.json();
-
-            if (Array.isArray(data) && data.length > 0) {
-                // Normalize ward names in toppers
-                const normalizedToppers = data.map((topper: any) => ({
-                    ...topper,
-                    ward: normalizeWardName(topper.ward)
-                }));
-                setTodaysToppers(normalizedToppers);
-            } else {
-                // Dummy data for testing/fallback
-                // setTodaysToppers([
-                //     { _id: '1', name: 'Muhammed Nihal', ward: 'Tiruvegapura', totalQuantity: 10, totalAmount: 5000 },
-                //     { _id: '2', name: 'Adil K', ward: 'Muthuthala', totalQuantity: 8, totalAmount: 4000 },
-                //     { _id: '3', name: 'Sahal P', ward: 'Vilathur', totalQuantity: 5, totalAmount: 2500 }
-                // ]);
-            }
-        } catch (error) {
-            console.error('Error fetching toppers, using dummy data:', error);
-            // setTodaysToppers([
-            //     { _id: '1', name: 'Muhammed Nihal', ward: 'Tiruvegapura', totalQuantity: 10, totalAmount: 5000 },
-            //     { _id: '2', name: 'Adil K', ward: 'Muthuthala', totalQuantity: 8, totalAmount: 4000 },
-            //     { _id: '3', name: 'Sahal P', ward: 'Vilathur', totalQuantity: 5, totalAmount: 2500 }
-            // ]);
-        }
-    };
-
     useEffect(() => {
         fetchStats();
-        fetchToppers();
 
         const socket = io(SOCKET_URL);
         socket.on('connect', () => console.log('Connected to socket'));
         socket.on('payment_success', (data: any) => {
             console.log('Payment success event:', data);
             fetchStats();
-            fetchToppers();
         });
         socket.on('payment_created', () => {
             fetchStats();
-            fetchToppers();
         });
 
         return () => {
